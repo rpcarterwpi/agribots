@@ -11,7 +11,7 @@ class MyController(Controller):
     # def on_x_press(self):
     #    print("Hello world")
     def on_L3_up(self,value):
-        new_value = math.max(0.0,math.min(1.0,math.abs((value+281)/-32486)))
+        new_value = max(0.0,min(1.0,abs((value+281)/-32486)))
         print(f'UP! {new_value}')
         # -281 -> -32767
         # motors.motor1.setSpeed(s)
