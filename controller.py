@@ -8,20 +8,10 @@ class MyController(Controller):
     def __init__(self, **kwargs):
         Controller.__init__(self, **kwargs)
 
-    # def on_x_press(self):
-    #    print("Hello world")
     def on_L3_up(self,value):
         new_value = max(0.0,min(1.0,abs((value+281)/-32486)))
         print(f'UP! {new_value}')
         motors.motor1.setSpeed(new_value*MAX_SPEED)
-        # -281 -> -32767
-        # motors.motor1.setSpeed(s)
-
-    def on_L3_left(self,value):
-        value = 0
-
-    def on_L3_right(self,value):
-        value = 0
 
     def on_L3_down(self,value):
         new_value = max(0.0,min(1.0,abs((value-281)/32486)))
@@ -31,6 +21,20 @@ class MyController(Controller):
     def on_L3_y_at_rest(self):
         print('reset motors')
         motors.motor1.setSpeed(0)
+
+    def on_R3_up(self,value):
+        new_value = max(0.0,min(1.0,abs((value+281)/-32486)))
+        print(f'UP! {new_value}')
+        motors.motor2.setSpeed(new_value*MAX_SPEED)
+
+    def on_R3_down(self,value):
+        new_value = max(0.0,min(1.0,abs((value-281)/32486)))
+        print(f'DOWN! {new_value}')
+        motors.motor2.setSpeed(new_value*MAX_SPEED*-1)
+
+    def on_R3_y_at_rest(self):
+        print('reset motors')
+        motors.motor2.setSpeed(0)
 
 
 
