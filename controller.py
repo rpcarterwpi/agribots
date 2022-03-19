@@ -17,7 +17,7 @@ class MyController(Controller):
     def on_L3_down(self,value):
         print(f'DOWN! {value}')
 
-    def on_L3_y_at_rest():
+    def on_L3_y_at_rest(self):
         print('reset motors')
 
 
