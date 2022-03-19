@@ -1,7 +1,7 @@
 from pyPS4Controller.controller import Controller
 import time
 from dual_max14870_rpi import motors, MAX_SPEED
-
+import math
 
 class MyController(Controller):
 
