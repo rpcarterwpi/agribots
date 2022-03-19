@@ -24,10 +24,13 @@ class MyController(Controller):
         value = 0
 
     def on_L3_down(self,value):
-        print(f'DOWN! {value}')
+        new_value = max(0.0,min(1.0,abs((value-281)/32486)))
+        print(f'DOWN! {new_value}')
+        motors.motor1.setSpeed(new_value*MAX_SPEED*-1)
 
     def on_L3_y_at_rest(self):
         print('reset motors')
+        motors.motor1.setSpeed(0)
 
 
 
