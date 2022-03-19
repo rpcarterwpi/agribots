@@ -13,6 +13,7 @@ class MyController(Controller):
     def on_L3_up(self,value):
         new_value = max(0.0,min(1.0,abs((value+281)/-32486)))
         print(f'UP! {new_value}')
+        motors.motor1.setSpeed(new_value*MAX_SPEED)
         # -281 -> -32767
         # motors.motor1.setSpeed(s)
 
