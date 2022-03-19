@@ -14,6 +14,12 @@ class MyController(Controller):
         print(f'UP! {value}')
         # motors.motor1.setSpeed(s)
 
+    def on_L3_left(self,value):
+        value = 0
+
+    def on_L3_right(self,value):
+        value = 0
+
     def on_L3_down(self,value):
         print(f'DOWN! {value}')
 
