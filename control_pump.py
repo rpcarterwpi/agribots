@@ -22,7 +22,7 @@ led1 = gpiozero.LED(37)
 led2 = gpiozero.LED(26)
 led1.off()
 led2.off()
-sleep(5s)
+sleep(5)
 
 # led = gpiozero.PWMLED(37)
 # led.value = 0.5
