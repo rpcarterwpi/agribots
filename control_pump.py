@@ -12,10 +12,10 @@ led = gpiozero.LED(26)
 for i in range(10):
     print('high')
     led.on()
-    time.sleep(0.2)
+    sleep(0.2)
     led.off()
     print('low')
-    time.sleep(0.2)
+    sleep(0.2)
 
 # led = PWMLED(2)
 #
