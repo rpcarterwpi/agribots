@@ -19,8 +19,8 @@ from time import sleep
 #     print('low')
 #     sleep(1)
 
-led = PWMLED(37)
-led2 = PWMLED(26)
+led = gpiozero.PWMLED(37)
+led2 = gpiozero.PWMLED(26)
 #
 for i in range(10):
     for b in range(101):
