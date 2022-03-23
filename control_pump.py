@@ -8,9 +8,9 @@ import gpiozero
 
 from time import sleep
 # or 37
-led = gpiozero.LED(37)
-led.on()
-sleep(5)
+# led = gpiozero.LED(37)
+# led.on()
+# sleep(5)
 # for i in range(10):
 #     print('high')
 #     led.on()
@@ -19,8 +19,11 @@ sleep(5)
 #     print('low')
 #     sleep(1)
 
-# led = PWMLED(2)
+led = PWMLED(37)
+led2 = PWMLED(26)
 #
-# for b in range(101):
-#     led.value = b / 100.0
-#     sleep(0.01)
+for i in range(10):
+    for b in range(101):
+        led.value = b / 100.0
+        led2.value = b / 100.0
+        sleep(0.01)
