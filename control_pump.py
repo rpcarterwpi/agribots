@@ -18,12 +18,19 @@ from time import sleep
 #     led.off()
 #     print('low')
 #     sleep(1)
+led1 = gpiozero.LED(37)
+led2 = gpiozero.LED(26)
+led1.off()
+led2.off()
+sleep(5s)
 
-led = gpiozero.PWMLED(37)
-led2 = gpiozero.PWMLED(26)
+# led = gpiozero.PWMLED(37)
+# led.value = 0.5
+# sleep(5)
+# led2 = gpiozero.PWMLED(26)
 #
-for i in range(10):
-    for b in range(101):
-        led.value = b / 100.0
-        led2.value = b / 100.0
-        sleep(0.01)
+# for i in range(10):
+    # for b in range(101):
+    #     led.value = b / 100.0
+    #     # led2.value = b / 100.0
+    #     sleep(0.01)
