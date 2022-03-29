@@ -7,12 +7,12 @@ GPIO.setmode(GPIO.BOARD)
 
 # Motor 1 Setup
 ENA1, IN1, IN2 = 33, 29, 31
-GPIO.setup(ENA1, GPIO.OUT)
+# GPIO.setup(ENA1, GPIO.OUT)
 GPIO.setup(IN1, GPIO.OUT)
 GPIO.setup(IN2, GPIO.OUT)
-# PWMA = GPIO.PWM(ENA1, 10)
-# PWMA.start(0)
-GPIO.output(ENA1, GPIO.HIGH)
+PWMA = GPIO.PWM(ENA1, 10)
+PWMA.start(0)
+# GPIO.output(ENA1, GPIO.HIGH)
 GPIO.output(IN1, GPIO.HIGH)
 GPIO.output(IN2, GPIO.LOW)
 
