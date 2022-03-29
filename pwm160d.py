@@ -12,7 +12,7 @@ GPIO.setup(IN1, GPIO.OUT)
 GPIO.setup(IN2, GPIO.OUT)
 #
 PWMA = GPIO.PWM(ENA1, 50)
-PWMA.start(50)
+PWMA.start(100)
 # GPIO.output(IN1, GPIO.LOW)
 # GPIO.output(ENA1, GPIO.LOW)
 # GPIO.output(IN2, GPIO.LOW)
