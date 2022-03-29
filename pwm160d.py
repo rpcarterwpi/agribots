@@ -6,10 +6,15 @@ from time import sleep
 GPIO.setmode(GPIO.BOARD)
 
 # Motor 1 Setup
-PWR1, ENA1, IN1, IN2, GND = 2, 33, 31, 29, 39
+ENA1, IN1, IN2 = 33, 29, 31
 GPIO.setup(ENA1, GPIO.OUT)
 GPIO.setup(IN1, GPIO.OUT)
 GPIO.setup(IN2, GPIO.OUT)
 PWMA = GPIO.PWM(ENA1, 50)
 PWMA.start(0)
+
+GPIO.output(IN1, GPIO.HIGH)
+GPIO.output(IN2, GPIO.LOW)
+
 sleep(2.5)
+GPIO.cleanup()
