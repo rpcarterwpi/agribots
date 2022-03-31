@@ -107,8 +107,14 @@ class MyController(Controller):
 # controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=True)
 # controller.listen()
 
-tank_drive(DriveMode.DRIVE,100,Motors.LEFT)
-tank_drive(DriveMode.DRIVE,100,Motors.RIGHT)
+# tank_drive(DriveMode.DRIVE,100,Motors.LEFT)
+# tank_drive(DriveMode.DRIVE,100,Motors.RIGHT)
+
+GPIO.output(IN1, GPIO.HIGH)
+GPIO.output(IN2, GPIO.LOW)
+
+PWM_cur = GPIO.PWM(ENA1,PWM_FREQ)
+PWM_cur.start(100)
 
 time.sleep(5)
 GPIO.cleanup()
