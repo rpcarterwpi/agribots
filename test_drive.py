@@ -142,9 +142,12 @@ class MyController(Controller):
 # cur_effort_R = 0
 # cur_drivemode_L = DriveMode.COAST
 # cur_drivemode_R = DriveMode.COAST
-controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=True)
-controller.listen()
-print('check')
+
+# controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=True)
+# controller.listen()
+
+
+# print('check')
 # tank_drive(cur_drivemode_L,cur_effort_L,Motors.LEFT)
 # tank_drive(cur_drivemode_R,cur_effort_R,Motors.LEFT)
 
