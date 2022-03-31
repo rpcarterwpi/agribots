@@ -43,13 +43,14 @@ def tank_drive(mode,effort,motor):
         INB = IN4
 
     if mode == DriveMode.DRIVE:
-        forward = effort/abs(effort) >= 0
-        if forward:
-            GPIO.output(INA, GPIO.HIGH)
-            GPIO.output(INB, GPIO.LOW)
-        else:
-            GPIO.output(INA, GPIO.LOW)
-            GPIO.output(INB, GPIO.HIGH)
+        if effort != 0:
+            forward = effort/abs(effort) >= 0
+            if forward:
+                GPIO.output(INA, GPIO.HIGH)
+                GPIO.output(INB, GPIO.LOW)
+            else:
+                GPIO.output(INA, GPIO.LOW)
+                GPIO.output(INB, GPIO.HIGH)
 
     elif mode == DriveMode.BRAKE:
         GPIO.output(INA, GPIO.LOW)
@@ -101,8 +102,6 @@ class MyController(Controller):
     def on_R3_y_at_rest(self):
         print('R Coast')
         tank_drive(DriveMode.COAST,0,Motors.RIGHT)
-
-
 
 # Create Controller
 controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=True)
