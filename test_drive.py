@@ -32,6 +32,11 @@ GPIO.setup(IN4, GPIO.OUT)
 PWM_FREQ = 100
 MAX_SPEED = 100
 
+cur_effort_L = 0
+cur_effort_R = 0
+cur_drivemode_L = DriveMode.COAST
+cur_drivemode_R = DriveMode.COAST
+
 def tank_drive(mode,effort,motor):
     if motor == Motors.LEFT:
         print('left')
@@ -73,6 +78,7 @@ def tank_drive(mode,effort,motor):
     print('going to pwm')
 
 
+
 def normalize_joystick(dir_up,value):
     if dir_up:
         new_value = max(0.0,min(1.0,abs((value+281)/-32486)))
@@ -87,30 +93,42 @@ class MyController(Controller):
     def on_L3_up(self,value):
         effort = MAX_SPEED*normalize_joystick(True,value)
         print(f'L Forward: {effort}')
-        tank_drive(DriveMode.DRIVE,effort,Motors.LEFT)
+        # tank_drive(DriveMode.DRIVE,effort,Motors.LEFT)
+        cur_drivemode_L = DriveMode.DRIVE
+        cur_effort_L = effort
 
     def on_L3_down(self,value):
         effort = -1*MAX_SPEED*normalize_joystick(False,value)
         print(f'L Back: {effort}')
-        tank_drive(DriveMode.DRIVE,effort,Motors.LEFT)
+        # tank_drive(DriveMode.DRIVE,effort,Motors.LEFT)
+        cur_drivemode_L = DriveMode.DRIVE
+        cur_effort_L = effort
 
     def on_L3_y_at_rest(self):
         print('L Coast')
-        tank_drive(DriveMode.COAST,0,Motors.LEFT)
+        # tank_drive(DriveMode.COAST,0,Motors.LEFT)
+        cur_drivemode_L = DriveMode.COAST
+        cur_effort_L = 0
 
     def on_R3_up(self,value):
         effort = MAX_SPEED*normalize_joystick(True,value)
         print(f'R Forward: {effort}')
-        tank_drive(DriveMode.DRIVE,effort,Motors.RIGHT)
+        # tank_drive(DriveMode.DRIVE,effort,Motors.RIGHT)
+        cur_drivemode_R = DriveMode.DRIVE
+        cur_effort_R = effort
 
     def on_R3_down(self,value):
         effort = -1*MAX_SPEED*normalize_joystick(False,value)
         print(f'R Back: {effort}')
-        tank_drive(DriveMode.DRIVE,effort,Motors.RIGHT)
+        # tank_drive(DriveMode.DRIVE,effort,Motors.RIGHT)
+        cur_drivemode_R = DriveMode.DRIVE
+        cur_effort_R = effort
 
     def on_R3_y_at_rest(self):
         print('R Coast')
         tank_drive(DriveMode.COAST,0,Motors.RIGHT)
+        cur_drivemode_R = DriveMode.COAST
+        cur_effort_R = 0
 
 # Create Controller
 # controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=True)
@@ -118,15 +136,17 @@ class MyController(Controller):
 
 # tank_drive(DriveMode.DRIVE,100,Motors.LEFT)
 # tank_drive(DriveMode.DRIVE,100,Motors.RIGHT)
-def drive():
 
-    GPIO.output(29, GPIO.HIGH)
-    GPIO.output(31, GPIO.LOW)
 
-    PWM_cur = GPIO.PWM(33,100)
-    PWM_cur.start(100)
-    print('got to end')
-    return
+# cur_effort_L = 0
+# cur_effort_R = 0
+# cur_drivemode_L = DriveMode.COAST
+# cur_drivemode_R = DriveMode.COAST
+controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=True)
+controller.listen()
+print('check')
+# tank_drive(cur_drivemode_L,cur_effort_L,Motors.LEFT)
+# tank_drive(cur_drivemode_R,cur_effort_R,Motors.LEFT)
 
 # GPIO.output(IN1, GPIO.HIGH)
 # GPIO.output(IN2, GPIO.LOW)
@@ -135,14 +155,5 @@ def drive():
 # PWM_cur.start(100)
 # drive()
 
-timeout_start = time.time()
-timeout = 5
 
-while time.time() < timeout_start + timeout:
-    drive()
-
-# drive()
-# tank_drive(DriveMode.DRIVE,100,Motors.LEFT)
-
-# time.sleep(5)
 GPIO.cleanup()
