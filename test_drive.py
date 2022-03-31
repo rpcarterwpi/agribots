@@ -120,19 +120,20 @@ class MyController(Controller):
 # tank_drive(DriveMode.DRIVE,100,Motors.RIGHT)
 def drive():
 
-    GPIO.output(IN1, GPIO.HIGH)
-    GPIO.output(IN2, GPIO.LOW)
+    GPIO.output(29, GPIO.HIGH)
+    GPIO.output(31, GPIO.LOW)
 
-    PWM_cur = GPIO.PWM(ENA1,PWM_FREQ)
+    PWM_cur = GPIO.PWM(33,100)
     PWM_cur.start(100)
+    print('got to end')
     return
 
-GPIO.output(IN1, GPIO.HIGH)
-GPIO.output(IN2, GPIO.LOW)
-
-PWM_cur = GPIO.PWM(ENA1,PWM_FREQ)
-PWM_cur.start(100)
-
+# GPIO.output(IN1, GPIO.HIGH)
+# GPIO.output(IN2, GPIO.LOW)
+#
+# PWM_cur = GPIO.PWM(ENA1,PWM_FREQ)
+# PWM_cur.start(100)
+drive()
 # drive()
 # tank_drive(DriveMode.DRIVE,100,Motors.LEFT)
 
