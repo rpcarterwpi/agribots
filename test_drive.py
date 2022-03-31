@@ -104,5 +104,11 @@ class MyController(Controller):
         tank_drive(DriveMode.COAST,0,Motors.RIGHT)
 
 # Create Controller
-controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=True)
-controller.listen()
+# controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=True)
+# controller.listen()
+
+tank_drive(DriveMode.DRIVE,100,Motors.LEFT)
+tank_drive(DriveMode.DRIVE,100,Motors.RIGHT)
+
+sleep(5)
+GPIO.cleanup()
