@@ -69,6 +69,7 @@ def tank_drive(mode,effort,motor):
 
     PWM_cur = GPIO.PWM(ENA,PWM_FREQ)
     PWM_cur.start(abs(effort))
+    print(abs(effort))
     print('going to pwm')
 
 
@@ -118,13 +119,13 @@ class MyController(Controller):
 # tank_drive(DriveMode.DRIVE,100,Motors.LEFT)
 # tank_drive(DriveMode.DRIVE,100,Motors.RIGHT)
 
-# GPIO.output(IN1, GPIO.HIGH)
-# GPIO.output(IN2, GPIO.LOW)
-#
-# PWM_cur = GPIO.PWM(ENA1,PWM_FREQ)
-# PWM_cur.start(100)
+GPIO.output(IN1, GPIO.HIGH)
+GPIO.output(IN2, GPIO.LOW)
 
-tank_drive(DriveMode.DRIVE,100,Motors.LEFT)
+PWM_cur = GPIO.PWM(ENA1,PWM_FREQ)
+PWM_cur.start(100)
+
+# tank_drive(DriveMode.DRIVE,100,Motors.LEFT)
 
 time.sleep(5)
 GPIO.cleanup()
