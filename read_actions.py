@@ -77,6 +77,6 @@ while time.time() < end_time:
     # f = open('actions.txt', 'r')
     # print(f.readlines())
     tank_drive(DriveMode.DRIVE,100,Motors.LEFT)
-    tank_drive(DriveMode.DRIVE,100,Motors.RIGHT)
+    tank_drive(DriveMode.DRIVE,-100,Motors.RIGHT)
 
 GPIO.cleanup()
