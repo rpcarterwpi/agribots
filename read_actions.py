@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 import math
-from enum import Enum
+from enum import IntEnum
 
 class DriveMode(IntEnum):
     DRIVE = 1
