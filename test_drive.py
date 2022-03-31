@@ -4,10 +4,10 @@ import time
 import math
 from enum import Enum
 
-# class DriveMode(Enum):
-#     DRIVE = 1
-#     BRAKE = 2
-#     COAST = 3
+class DriveMode(Enum):
+    DRIVE = 1
+    BRAKE = 2
+    COAST = 3
 #
 # class Motors(Enum):
 #     LEFT = 1
