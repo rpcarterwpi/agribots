@@ -143,8 +143,8 @@ class MyController(Controller):
 # cur_drivemode_L = DriveMode.COAST
 # cur_drivemode_R = DriveMode.COAST
 
-# controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=True)
-# controller.listen()
+controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=True)
+controller.listen()
 
 
 # print('check')
