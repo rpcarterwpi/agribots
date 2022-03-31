@@ -33,12 +33,12 @@ MAX_SPEED = 100
 
 def tank_drive(mode,effort,motor):
     if motor == Motors.LEFT:
-        print('left')
+        # print('left')
         ENA = ENA1
         INA = IN1
         INB = IN2
     elif motor == Motors.RIGHT:
-        print('right')
+        # print('right')
         ENA = ENA2
         INA = IN3
         INB = IN4
@@ -46,12 +46,12 @@ def tank_drive(mode,effort,motor):
     print(INA)
     print(INB)
     if mode == DriveMode.DRIVE:
-        print('drive')
+        # print('drive')
         if effort != 0:
             forward = effort/abs(effort) >= 0
             print(forward)
             if forward:
-                print('forward')
+                # print('forward')
                 GPIO.output(INA, GPIO.HIGH)
                 GPIO.output(INB, GPIO.LOW)
             else:
@@ -69,9 +69,9 @@ def tank_drive(mode,effort,motor):
     PWM_cur = GPIO.PWM(ENA,PWM_FREQ)
     PWM_cur.start(abs(effort))
     print(abs(effort))
-    print('going to pwm')
+    # print('going to pwm')
 
-end_time = time.time() + 30
+end_time = time.time() + 5
 
 while time.time() < end_time:
     # f = open('actions.txt', 'r')
