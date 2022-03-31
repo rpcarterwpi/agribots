@@ -14,6 +14,9 @@ class Motors(Enum):
     RIGHT = 2
     PUMP = 3
 
+# SetMode
+GPIO.setmode(GPIO.BOARD)
+
 # Left Setup
 ENA1, IN1, IN2 = 33, 29, 31
 GPIO.setup(ENA1, GPIO.OUT)
@@ -99,8 +102,7 @@ class MyController(Controller):
         print('R Coast')
         tank_drive(DriveMode.COAST,0,Motors.RIGHT)
 
-# SetMode
-GPIO.setmode(GPIO.BOARD)
+
 
 # Create Controller
 controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=True)
