@@ -4,7 +4,7 @@ import time
 import math
 from enum import Enum
 
-class DriveMode(Enum):
+class DriveMode(IntEnum):
     DRIVE = 1
     BRAKE = 2
     COAST = 3
@@ -39,10 +39,10 @@ cur_drivemode_R = DriveMode.COAST
 
 def write_vals():
     f = open('actions.txt', 'w')
-    f.write(str(cur_effort_L))
-    f.write(str(cur_effort_R))
-    f.write(str(cur_drivemode_L))
-    f.write(str(cur_drivemode_R))
+    f.write(str(cur_effort_L)+'\n')
+    f.write(str(cur_effort_R)+'\n')
+    f.write(str(int(cur_drivemode_L))+'\n')
+    f.write(str(int(cur_drivemode_R))+'\n')
     f.close()
 
 
