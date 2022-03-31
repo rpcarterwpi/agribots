@@ -2,6 +2,7 @@ from pyPS4Controller.controller import Controller
 import RPi.GPIO as GPIO
 import time
 import math
+from enum import Enum
 
 class DriveMode(Enum):
     DRIVE = 1
