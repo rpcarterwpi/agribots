@@ -34,18 +34,25 @@ MAX_SPEED = 100
 
 def tank_drive(mode,effort,motor):
     if motor == Motors.LEFT:
+        print('left')
         ENA = ENA1
         INA = IN1
         INB = IN2
     elif motor == Motors.RIGHT:
+        print('right')
         ENA = ENA2
         INA = IN3
         INB = IN4
-
+    print(ENA)
+    print(INA)
+    print(INB)
     if mode == DriveMode.DRIVE:
+        print('drive')
         if effort != 0:
             forward = effort/abs(effort) >= 0
+            print(forward)
             if forward:
+                print('forward')
                 GPIO.output(INA, GPIO.HIGH)
                 GPIO.output(INB, GPIO.LOW)
             else:
@@ -62,6 +69,7 @@ def tank_drive(mode,effort,motor):
 
     PWM_cur = GPIO.PWM(ENA,PWM_FREQ)
     PWM_cur.start(abs(effort))
+    print('going to pwm')
 
 
 def normalize_joystick(dir_up,value):
