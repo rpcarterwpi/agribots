@@ -133,9 +133,16 @@ def drive():
 #
 # PWM_cur = GPIO.PWM(ENA1,PWM_FREQ)
 # PWM_cur.start(100)
-drive()
+# drive()
+
+timeout_start = time.time()
+timeout = 5
+
+while time.time() < timeout_start + timeout:
+    drive()
+
 # drive()
 # tank_drive(DriveMode.DRIVE,100,Motors.LEFT)
 
-time.sleep(5)
+# time.sleep(5)
 GPIO.cleanup()
