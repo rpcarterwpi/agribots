@@ -43,7 +43,7 @@ def tank_drive(mode,effort,motor):
         if forward:
             GPIO.output(INA, GPIO.HIGH)
             GPIO.output(INB, GPIO.LOW)
-        else
+        else:
             GPIO.output(INA, GPIO.LOW)
             GPIO.output(INB, GPIO.HIGH)
 
