@@ -39,10 +39,10 @@ cur_drivemode_R = DriveMode.COAST
 
 def write_vals():
     f = open('actions.txt', 'w')
-    f.write(cur_effort_L)
-    f.write(cur_effort_R)
-    f.write(cur_drivemode_L)
-    f.write(cur_drivemode_R)
+    f.write(str(cur_effort_L))
+    f.write(str(cur_effort_R))
+    f.write(str(cur_drivemode_L))
+    f.write(str(cur_drivemode_R))
     f.close()
 
 
