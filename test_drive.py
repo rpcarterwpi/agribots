@@ -110,5 +110,5 @@ class MyController(Controller):
 tank_drive(DriveMode.DRIVE,100,Motors.LEFT)
 tank_drive(DriveMode.DRIVE,100,Motors.RIGHT)
 
-sleep(5)
+time.sleep(5)
 GPIO.cleanup()
