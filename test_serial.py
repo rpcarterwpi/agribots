@@ -3,7 +3,7 @@ import os, sys
 import serial
 import time
 
-ser = serial.Serial('/dev/ttyUSB0',19200, timeout = 5)
+ser = serial.Serial('/dev/tty0',19200, timeout = 5)
 
 # listen for the input, exit if nothing received in timeout period
 while True:
