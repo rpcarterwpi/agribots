@@ -80,8 +80,8 @@ def tank_drive(mode,effort,motor):
 end_time = time.time() + 5
 while time.time() < end_time:
     tank_drive(DriveMode.DRIVE,100,Motors.RIGHT)
-    tank_drive(DriveMode.DRIVE,100,Motors.LEFT)
-    time.sleep(0.01)
+    tank_drive(DriveMode.DRIVE,-100,Motors.LEFT)
+    # time.sleep(0.01)
     # f = open('actions.txt', 'r')
     # print(f.readlines())
 
