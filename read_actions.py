@@ -68,8 +68,8 @@ def tank_drive(mode,effort,motor):
 
     PWM_cur = GPIO.PWM(ENA,PWM_FREQ)
     PWM_cur.start(abs(effort))
-    print(abs(effort))
-    print('going to pwm')
+    # print(abs(effort))
+    # print('going to pwm')
 
 end_time = time.time() + 5
 
