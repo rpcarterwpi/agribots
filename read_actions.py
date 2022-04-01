@@ -69,14 +69,20 @@ def tank_drive(mode,effort,motor):
     PWM_cur = GPIO.PWM(ENA,PWM_FREQ)
     PWM_cur.start(abs(effort))
     # print(abs(effort))
-    print('going to pwm')
+    # print('going to pwm')
+    time.sleep(0.05)
 
-end_time = time.time() + 5
 
-while time.time() < end_time:
+tank_drive(DriveMode.DRIVE,100,Motors.RIGHT)
+tank_drive(DriveMode.DRIVE,100,Motors.LEFT)
+time.sleep(5)
+
+# end_time = time.time() + 5
+# while time.time() < end_time:
+    # tank_drive(DriveMode.DRIVE,100,Motors.RIGHT)
+    # tank_drive(DriveMode.DRIVE,100,Motors.LEFT)
     # f = open('actions.txt', 'r')
     # print(f.readlines())
-    tank_drive(DriveMode.DRIVE,100,Motors.RIGHT)
-    tank_drive(DriveMode.DRIVE,100,Motors.LEFT)
+
 
 GPIO.cleanup()
