@@ -77,7 +77,7 @@ def tank_drive(mode,effort,motor):
 # tank_drive(DriveMode.DRIVE,100,Motors.LEFT)
 # time.sleep(5)
 
-end_time = time.time() + 5
+end_time = time.time() + 15
 while time.time() < end_time:
     tank_drive(DriveMode.DRIVE,100,Motors.RIGHT)
     tank_drive(DriveMode.DRIVE,-100,Motors.LEFT)
