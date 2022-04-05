@@ -58,7 +58,7 @@ class MyController(Controller):
         # tank_drive(DriveMode.DRIVE,effort,Motors.LEFT)
         cur_drivemode_L = DriveMode.DRIVE
         cur_effort_L = effort
-        print(cur_efort_L)
+        print(cur_effort_L)
         write_vals()
 
     def on_L3_down(self,value):
@@ -67,7 +67,7 @@ class MyController(Controller):
         # tank_drive(DriveMode.DRIVE,effort,Motors.LEFT)
         cur_drivemode_L = DriveMode.DRIVE
         cur_effort_L = effort
-        print(cur_efort_L)
+        print(cur_effort_L)
         write_vals()
 
     def on_L3_y_at_rest(self):
@@ -75,7 +75,7 @@ class MyController(Controller):
         # tank_drive(DriveMode.COAST,0,Motors.LEFT)
         cur_drivemode_L = DriveMode.COAST
         cur_effort_L = 0
-        print(cur_efort_L)
+        print(cur_effort_L)
         write_vals()
 
     def on_R3_up(self,value):
@@ -84,7 +84,7 @@ class MyController(Controller):
         # tank_drive(DriveMode.DRIVE,effort,Motors.RIGHT)
         cur_drivemode_R = DriveMode.DRIVE
         cur_effort_R = effort
-        print(cur_efort_R)
+        print(cur_effort_R)
         write_vals()
 
     def on_R3_down(self,value):
@@ -93,7 +93,7 @@ class MyController(Controller):
         # tank_drive(DriveMode.DRIVE,effort,Motors.RIGHT)
         cur_drivemode_R = DriveMode.DRIVE
         cur_effort_R = effort
-        print(cur_efort_R)
+        print(cur_effort_R)
         write_vals()
 
     def on_R3_y_at_rest(self):
@@ -101,7 +101,7 @@ class MyController(Controller):
         # tank_drive(DriveMode.COAST,0,Motors.RIGHT)
         cur_drivemode_R = DriveMode.COAST
         cur_effort_R = 0
-        print(cur_efort_R)
+        print(cur_effort_R)
         write_vals()
 
 controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=True)
