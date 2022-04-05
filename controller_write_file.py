@@ -63,7 +63,7 @@ class MyController(Controller):
         cur_drivemode_L = DriveMode.DRIVE
         cur_effort_L = effort
         print(cur_effort_L)
-        write_vals()
+        self.write_vals()
 
     def on_L3_down(self,value):
         effort = -1*MAX_SPEED*normalize_joystick(False,value)
@@ -72,7 +72,7 @@ class MyController(Controller):
         cur_drivemode_L = DriveMode.DRIVE
         cur_effort_L = effort
         print(cur_effort_L)
-        write_vals()
+        self.write_vals()
 
     def on_L3_y_at_rest(self):
         # print('L Coast')
@@ -80,7 +80,7 @@ class MyController(Controller):
         cur_drivemode_L = DriveMode.COAST
         cur_effort_L = 0
         print(cur_effort_L)
-        write_vals()
+        self.write_vals()
 
     def on_R3_up(self,value):
         effort = MAX_SPEED*normalize_joystick(True,value)
@@ -89,7 +89,7 @@ class MyController(Controller):
         cur_drivemode_R = DriveMode.DRIVE
         cur_effort_R = effort
         print(cur_effort_R)
-        write_vals()
+        self.write_vals()
 
     def on_R3_down(self,value):
         effort = -1*MAX_SPEED*normalize_joystick(False,value)
@@ -98,7 +98,7 @@ class MyController(Controller):
         cur_drivemode_R = DriveMode.DRIVE
         cur_effort_R = effort
         print(cur_effort_R)
-        write_vals()
+        self.write_vals()
 
     def on_R3_y_at_rest(self):
         # print('R Coast')
@@ -106,7 +106,7 @@ class MyController(Controller):
         cur_drivemode_R = DriveMode.COAST
         cur_effort_R = 0
         print(cur_effort_R)
-        write_vals()
+        self.write_vals()
 
 controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=True)
 controller.listen()
