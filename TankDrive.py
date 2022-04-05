@@ -39,7 +39,7 @@ GPIO.setup(IN4, GPIO.OUT)
 
 
 def tank_drive(mode,effort,motor):
-    GPIO.setmode(GPIO.BOARD)
+    # GPIO.setmode(GPIO.BOARD)
     if motor == Motors.LEFT:
         # print('left')
         ENA = ENA1

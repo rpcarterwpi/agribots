@@ -3,12 +3,12 @@ import math
 from enum import IntEnum
 from pyPS4Controller.controller import Controller
 import RPi.GPIO as GPIO
-from TankDrive import DriveMode, Motors, tank_drive
+# from TankDrive import DriveMode, Motors, tank_drive
 
-# class DriveMode(IntEnum):
-#     DRIVE = 1
-#     BRAKE = 2
-#     COAST = 3
+class DriveMode(IntEnum):
+    DRIVE = 1
+    BRAKE = 2
+    COAST = 3
 
 MAX_SPEED = 100
 
@@ -89,7 +89,7 @@ class MyController(Controller):
 
     def on_R3_y_at_rest(self):
         print('R Coast')
-        tank_drive(DriveMode.COAST,0,Motors.RIGHT)
+        # tank_drive(DriveMode.COAST,0,Motors.RIGHT)
         cur_drivemode_R = DriveMode.COAST
         cur_effort_R = 0
         write_vals()

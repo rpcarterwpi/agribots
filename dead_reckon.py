@@ -23,7 +23,6 @@ MAX_SPEED = 100
 
 
 def tank_drive(mode,effort,motor):
-    GPIO.setmode(GPIO.BOARD)
     if motor == Motors.LEFT:
         # print('left')
         ENA = ENA1
