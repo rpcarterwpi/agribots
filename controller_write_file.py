@@ -1,35 +1,15 @@
-from pyPS4Controller.controller import Controller
-import RPi.GPIO as GPIO
 import time
 import math
 from enum import IntEnum
+from pyPS4Controller.controller import Controller
+import RPi.GPIO as GPIO
+from TankDrive import DriveMode, Motors, tank_drive
 
-class DriveMode(IntEnum):
-    DRIVE = 1
-    BRAKE = 2
-    COAST = 3
-#
-# class Motors(Enum):
-#     LEFT = 1
-#     RIGHT = 2
-#     PUMP = 3
-#
-# # SetMode
-# GPIO.setmode(GPIO.BOARD)
-#
-# # Left Setup
-# ENA1, IN1, IN2 = 33, 29, 31
-# GPIO.setup(ENA1, GPIO.OUT)
-# GPIO.setup(IN1, GPIO.OUT)
-# GPIO.setup(IN2, GPIO.OUT)
-#
-# # Right Setup
-# ENA2, IN3, IN4 = 32, 16, 18
-# GPIO.setup(ENA2, GPIO.OUT)
-# GPIO.setup(IN3, GPIO.OUT)
-# GPIO.setup(IN4, GPIO.OUT)
-#
-# PWM_FREQ = 100
+# class DriveMode(IntEnum):
+#     DRIVE = 1
+#     BRAKE = 2
+#     COAST = 3
+
 MAX_SPEED = 100
 
 cur_effort_L = 0
@@ -45,49 +25,18 @@ def write_vals():
     f.write(str(int(cur_drivemode_R))+'\n')
     f.close()
 
-
-# def tank_drive(mode,effort,motor):
-#     if motor == Motors.LEFT:
-#         print('left')
-#         ENA = ENA1
-#         INA = IN1
-#         INB = IN2
-#     elif motor == Motors.RIGHT:
-#         print('right')
-#         ENA = ENA2
-#         INA = IN3
-#         INB = IN4
-#     print(ENA)
-#     print(INA)
-#     print(INB)
-#     if mode == DriveMode.DRIVE:
-#         print('drive')
-#         if effort != 0:
-#             forward = effort/abs(effort) >= 0
-#             print(forward)
-#             if forward:
-#                 print('forward')
-#                 GPIO.output(INA, GPIO.HIGH)
-#                 GPIO.output(INB, GPIO.LOW)
-#             else:
-#                 GPIO.output(INA, GPIO.LOW)
-#                 GPIO.output(INB, GPIO.HIGH)
+# while True:
+#     time.sleep(0.1)
+#     cur_effort_L += 0.01
+#     cur_effort_R -= 0.01
+#     if time.time()%2==0:
+#         cur_drivemode_L = DriveMode.DRIVE
+#         cur_drivemode_R = DriveMode.DRIVE
+#     else:
+#         cur_drivemode_L = DriveMode.BRAKE
+#         cur_drivemode_R = DriveMode.BRAKE
+#     write_vals()
 #
-#     elif mode == DriveMode.BRAKE:
-#         GPIO.output(INA, GPIO.LOW)
-#         GPIO.output(INB, GPIO.LOW)
-#
-#     elif mode == DriveMode.COAST:
-#         GPIO.output(INA, GPIO.HIGH)
-#         GPIO.output(INB, GPIO.HIGH)
-#
-#     PWM_cur = GPIO.PWM(ENA,PWM_FREQ)
-#     PWM_cur.start(abs(effort))
-#     print(abs(effort))
-#     print('going to pwm')
-
-
-
 def normalize_joystick(dir_up,value):
     if dir_up:
         new_value = max(0.0,min(1.0,abs((value+281)/-32486)))
@@ -145,32 +94,5 @@ class MyController(Controller):
         cur_effort_R = 0
         write_vals()
 
-# Create Controller
-# controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=True)
-# controller.listen()
-
-# tank_drive(DriveMode.DRIVE,100,Motors.LEFT)
-# tank_drive(DriveMode.DRIVE,100,Motors.RIGHT)
-
-
-# cur_effort_L = 0
-# cur_effort_R = 0
-# cur_drivemode_L = DriveMode.COAST
-# cur_drivemode_R = DriveMode.COAST
-
 controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=True)
 controller.listen()
-
-
-# tank_drive(cur_drivemode_L,cur_effort_L,Motors.LEFT)
-# tank_drive(cur_drivemode_R,cur_effort_R,Motors.LEFT)
-
-# GPIO.output(IN1, GPIO.HIGH)
-# GPIO.output(IN2, GPIO.LOW)
-#
-# PWM_cur = GPIO.PWM(ENA1,PWM_FREQ)
-# PWM_cur.start(100)
-# drive()
-
-
-# GPIO.cleanup()

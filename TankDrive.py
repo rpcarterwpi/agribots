@@ -11,7 +11,6 @@ class DriveMode(IntEnum):
 class Motors(IntEnum):
     LEFT = 1
     RIGHT = 2
-    PUMP = 3
 
 # SetMode
 GPIO.setmode(GPIO.BOARD)
@@ -70,31 +69,3 @@ def tank_drive(mode,effort,motor):
     PWM_cur.start(abs(effort))
     # print(abs(effort))
     print('going to pwm')
-
-
-
-# tank_drive(DriveMode.DRIVE,100,Motors.RIGHT)
-# tank_drive(DriveMode.DRIVE,100,Motors.LEFT)
-# time.sleep(5)
-
-end_time = time.time() + 30
-while time.time() < end_time:
-    tank_drive(DriveMode.DRIVE,-100,Motors.RIGHT)
-    tank_drive(DriveMode.DRIVE,100,Motors.LEFT)
-    # tank_drive(DriveMode.COAST,0,Motors.RIGHT)
-    # tank_drive(DriveMode.COAST,0,Motors.LEFT)
-    # time.sleep(0.01)
-    # f = open('actions.txt', 'r')
-    # print(f.readlines())
-end_time = time.time() + 30
-while time.time() < end_time:
-    tank_drive(DriveMode.DRIVE,100,Motors.RIGHT)
-    tank_drive(DriveMode.DRIVE,-100,Motors.LEFT)
-    # tank_drive(DriveMode.COAST,0,Motors.RIGHT)
-    # tank_drive(DriveMode.COAST,0,Motors.LEFT)
-    # time.sleep(0.01)
-    # f = open('actions.txt', 'r')
-    # print(f.readlines())
-
-
-GPIO.cleanup()
