@@ -35,16 +35,16 @@ def tank_drive(mode,effort,motor):
         ENA = ENA2
         INA = IN3
         INB = IN4
-    print(ENA)
-    print(INA)
-    print(INB)
+    # print(ENA)
+    # print(INA)
+    # print(INB)
     if mode == DriveMode.DRIVE:
-        print('drive')
+        # print('drive')
         if effort != 0:
             forward = effort/abs(effort) >= 0
-            print(forward)
+            # print(forward)
             if forward:
-                print('forward')
+                # print('forward')
                 GPIO.output(INA, GPIO.HIGH)
                 GPIO.output(INB, GPIO.LOW)
             else:
@@ -88,7 +88,6 @@ GPIO.setup(IN3, GPIO.OUT)
 GPIO.setup(IN4, GPIO.OUT)
 
 while True:
-
     try:
         time.sleep(0.1)
         read_vals()
