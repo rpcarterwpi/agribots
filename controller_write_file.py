@@ -17,17 +17,7 @@ cur_effort_R = 0
 cur_drivemode_L = DriveMode.COAST
 cur_drivemode_R = DriveMode.COAST
 
-def write_vals():
-    f = open('actions.txt', 'w')
-    # print(cur_effort_L)
-    # print(cur_effort_R)
-    # print(cur_drivemode_L)
-    # print(cur_drivemode_L)
-    f.write(str(cur_effort_L)+'\n')
-    f.write(str(cur_effort_R)+'\n')
-    f.write(str(int(cur_drivemode_L))+'\n')
-    f.write(str(int(cur_drivemode_R))+'\n')
-    f.close()
+
 
 # while True:
 #     time.sleep(0.1)
@@ -49,8 +39,22 @@ def normalize_joystick(dir_up,value):
     return new_value
 
 class MyController(Controller):
+
+
     def __init__(self, **kwargs):
         Controller.__init__(self, **kwargs)
+
+    def write_vals():
+        f = open('actions.txt', 'w')
+        # print(cur_effort_L)
+        # print(cur_effort_R)
+        # print(cur_drivemode_L)
+        # print(cur_drivemode_L)
+        f.write(str(cur_effort_L)+'\n')
+        f.write(str(cur_effort_R)+'\n')
+        f.write(str(int(cur_drivemode_L))+'\n')
+        f.write(str(int(cur_drivemode_R))+'\n')
+        f.close()
 
     def on_L3_up(self,value):
         effort = MAX_SPEED*normalize_joystick(True,value)
