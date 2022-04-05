@@ -25,12 +25,12 @@ MAX_SPEED = 100
 
 
 def tank_drive(mode,effort,motor):
-    if motor == Motors.LEFT:
+    if motor == Motors.RIGHT:
         # print('left')
         ENA = ENA1
         INA = IN1
         INB = IN2
-    elif motor == Motors.RIGHT:
+    elif motor == Motors.LEFT:
         # print('right')
         ENA = ENA2
         INA = IN3
