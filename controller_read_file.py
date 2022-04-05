@@ -88,20 +88,23 @@ GPIO.setup(IN3, GPIO.OUT)
 GPIO.setup(IN4, GPIO.OUT)
 
 while True:
-    time.sleep(0.1)
-    try:
-        read_vals()
-        print(drive_vals[2])
-        print(drive_vals[0])
-        print(Motors.LEFT)
 
-        print(drive_vals[3])
-        print(drive_vals[1])
-        print(Motors.RIGHT)
+    try:
+        time.sleep(0.1)
+        read_vals()
+        print(drive_vals)
+        # print(drive_vals[2])
+        # print(drive_vals[0])
+        # print(Motors.LEFT)
+        #
+        # print(drive_vals[3])
+        # print(drive_vals[1])
+        # print(Motors.RIGHT)
 
         tank_drive(drive_vals[2],drive_vals[0],Motors.LEFT)
-        tank_drive(drive_vals[2],drive_vals[0],Motors.RIGHT)
+        tank_drive(drive_vals[3],drive_vals[1],Motors.RIGHT)
 
     except KeyboardInterrupt:
+        print('cleaningup')
         GPIO.cleanup()
         break
