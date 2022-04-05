@@ -12,8 +12,6 @@ class Motors(IntEnum):
     LEFT = 1
     RIGHT = 2
 
-# SetMode
-GPIO.setmode(GPIO.BOARD)
 # Left Setup
 ENA1, IN1, IN2 = 33, 29, 31
 
@@ -22,14 +20,6 @@ ENA2, IN3, IN4 = 32, 16, 18
 
 PWM_FREQ = 100
 MAX_SPEED = 100
-
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(ENA1, GPIO.OUT)
-GPIO.setup(IN1, GPIO.OUT)
-GPIO.setup(IN2, GPIO.OUT)
-GPIO.setup(ENA2, GPIO.OUT)
-GPIO.setup(IN3, GPIO.OUT)
-GPIO.setup(IN4, GPIO.OUT)
 
 
 def tank_drive(mode,effort,motor):
@@ -73,6 +63,14 @@ def tank_drive(mode,effort,motor):
     # print(abs(effort))
     print('going to pwm')
 
+# SetMode
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(ENA1, GPIO.OUT)
+GPIO.setup(IN1, GPIO.OUT)
+GPIO.setup(IN2, GPIO.OUT)
+GPIO.setup(ENA2, GPIO.OUT)
+GPIO.setup(IN3, GPIO.OUT)
+GPIO.setup(IN4, GPIO.OUT)
 
 end_time = time.time() + 5
 while time.time() < end_time:
