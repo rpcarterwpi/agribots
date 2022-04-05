@@ -51,10 +51,10 @@ class MyController(Controller):
         f.write(str(cur_effort_R)+'\n')
         f.write(str(int(cur_drivemode_L))+'\n')
         f.write(str(int(cur_drivemode_R))+'\n')
-            print(cur_effort_L)
-            print(cur_effort_R)
-            print(cur_drivemode_L)
-            print(cur_drivemode_L)
+        print(cur_effort_L)
+        print(cur_effort_R)
+        print(cur_drivemode_L)
+        print(cur_drivemode_L)
         f.close()
 
     def on_L3_up(self,value):
