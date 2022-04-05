@@ -1,7 +1,7 @@
 import time
 import math
 import RPi.GPIO as GPIO
-# from TankDrive import DriveMode, Motors, tank_drive, init_drive
+from enum import IntEnum
 
 class DriveMode(IntEnum):
     DRIVE = 1
@@ -13,7 +13,7 @@ class Motors(IntEnum):
     RIGHT = 2
 
 # SetMode
-
+GPIO.setmode(GPIO.BOARD)
 # Left Setup
 ENA1, IN1, IN2 = 33, 29, 31
 
