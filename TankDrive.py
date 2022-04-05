@@ -13,22 +13,30 @@ class Motors(IntEnum):
     RIGHT = 2
 
 # SetMode
-GPIO.setmode(GPIO.BOARD)
+
 
 # Left Setup
 ENA1, IN1, IN2 = 33, 29, 31
-GPIO.setup(ENA1, GPIO.OUT)
-GPIO.setup(IN1, GPIO.OUT)
-GPIO.setup(IN2, GPIO.OUT)
+
 
 # Right Setup
 ENA2, IN3, IN4 = 32, 16, 18
-GPIO.setup(ENA2, GPIO.OUT)
-GPIO.setup(IN3, GPIO.OUT)
-GPIO.setup(IN4, GPIO.OUT)
+
 
 PWM_FREQ = 100
 MAX_SPEED = 100
+
+def init_drive():
+    GPIO.setmode(GPIO.BOARD)
+    
+    GPIO.setup(ENA1, GPIO.OUT)
+    GPIO.setup(IN1, GPIO.OUT)
+    GPIO.setup(IN2, GPIO.OUT)
+
+    GPIO.setup(ENA2, GPIO.OUT)
+    GPIO.setup(IN3, GPIO.OUT)
+    GPIO.setup(IN4, GPIO.OUT)
+
 
 def tank_drive(mode,effort,motor):
     if motor == Motors.LEFT:

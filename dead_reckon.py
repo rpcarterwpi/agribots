@@ -1,7 +1,11 @@
 import time
 import math
 import RPi.GPIO as GPIO
-from TankDrive import DriveMode, Motors, tank_drive
+from TankDrive import DriveMode, Motors, tank_drive, init_drive
+
+
+# GPIO.setmode(GPIO.BOARD)
+init_drive()
 
 end_time = time.time() + 5
 while time.time() < end_time:
