@@ -28,7 +28,7 @@ MAX_SPEED = 100
 
 def init_drive():
     GPIO.setmode(GPIO.BOARD)
-    
+
     GPIO.setup(ENA1, GPIO.OUT)
     GPIO.setup(IN1, GPIO.OUT)
     GPIO.setup(IN2, GPIO.OUT)
@@ -39,6 +39,7 @@ def init_drive():
 
 
 def tank_drive(mode,effort,motor):
+    GPIO.setmode(GPIO.BOARD)
     if motor == Motors.LEFT:
         # print('left')
         ENA = ENA1
