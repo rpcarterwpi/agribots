@@ -44,7 +44,7 @@ class MyController(Controller):
     def __init__(self, **kwargs):
         Controller.__init__(self, **kwargs)
 
-    def write_vals():
+    def write_vals(self):
         f = open('actions.txt', 'w')
         # print(cur_effort_L)
         # print(cur_effort_R)
