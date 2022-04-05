@@ -89,7 +89,7 @@ GPIO.setup(IN4, GPIO.OUT)
 
 while True:
     try:
-        time.sleep(0.1)
+        # time.sleep(0.1)
         read_vals()
         print(drive_vals)
         # print(drive_vals[2])
