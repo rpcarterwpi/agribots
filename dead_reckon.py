@@ -1,5 +1,6 @@
 import time
 import math
+import RPi.GPIO as GPIO
 from TankDrive import DriveMode, Motors, tank_drive
 
 end_time = time.time() + 30
