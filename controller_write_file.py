@@ -79,7 +79,7 @@ class MyController(Controller):
     def on_L3_y_at_rest(self):
         # print('L Coast')
         # tank_drive(DriveMode.COAST,0,Motors.LEFT)
-        self.cur_drivemode_L = DriveMode.COAST
+        self.cur_drivemode_L = DriveMode.BRAKE
         self.cur_effort_L = 0
         print(self.cur_effort_L)
         self.write_vals()
@@ -105,7 +105,7 @@ class MyController(Controller):
     def on_R3_y_at_rest(self):
         # print('R Coast')
         # tank_drive(DriveMode.COAST,0,Motors.RIGHT)
-        self.cur_drivemode_R = DriveMode.COAST
+        self.cur_drivemode_R = DriveMode.BRAKE
         self.cur_effort_R = 0
         print(self.cur_effort_R)
         self.write_vals()
