@@ -3,7 +3,7 @@ import math
 import RPi.GPIO as GPIO
 
 RL, FL, RR, FR = 37, 35, 31, 29
-IN1, IN2, IN3, IN4 = 22, 24, 26, 28
+IN1, IN2, IN3, IN4 = 22, 24, 26, 36
 
 pwm_freq = 100
 
