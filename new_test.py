@@ -28,10 +28,10 @@ GPIO.output(IN3, GPIO.HIGH)
 GPIO.output(IN4, GPIO.LOW)
 
 # setting pwm 100
-PWM_FL = GPIO.PWM(FL,PWM_FREQ)
-PWM_FR = GPIO.PWM(FR,PWM_FREQ)
-PWM_RL = GPIO.PWM(RL,PWM_FREQ)
-PWM_RR = GPIO.PWM(RR,PWM_FREQ)
+PWM_FL = GPIO.PWM(FL,pwm_freq)
+PWM_FR = GPIO.PWM(FR,pwm_freq)
+PWM_RL = GPIO.PWM(RL,pwm_freq)
+PWM_RR = GPIO.PWM(RR,pwm_freq)
 
 effort = 100
 
