@@ -47,15 +47,15 @@ PWM_RR.start(effort)
 
 
 def encoder_measure():
-
+    vals = [GPIO.input(enc_FL),GPIO.input(enc_FR),GPIO.input(enc_RL),GPIO.input(enc_RR)]
+    return vals
 
 
 time_end = time.time() + 5
 a = 0
 while time.time() < time_end:
     try:
-        vals = [GPIO.input(enc_FL),GPIO.input(enc_FR),GPIO.input(enc_RL),GPIO.input(enc_RR)]
-        print(vals)
+        print(encoder_measure())
     except KeyboardIntemotor_RRupt:
         print('intemotor_RRupted, cleaning up')
         GPIO.cleanup()
