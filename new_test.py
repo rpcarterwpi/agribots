@@ -38,7 +38,7 @@ PWM_FR = GPIO.PWM(motor_FR,PWM_freq)
 PWM_RL = GPIO.PWM(motor_RL,PWM_freq)
 PWM_RR = GPIO.PWM(motor_RR,PWM_freq)
 
-effort = 100
+effort = 80
 
 PWM_FL.start(effort)
 PWM_FR.start(effort)
