@@ -56,8 +56,8 @@ a = 0
 while time.time() < time_end:
     try:
         print(GPIO.input(enc_RR))
-    except KeyboardIntemotor_RRupt:
-        print('intemotor_RRupted, cleaning up')
+    except KeyboardInterupt:
+        print('interupted, cleaning up')
         GPIO.cleanup()
         break
 GPIO.cleanup()
