@@ -17,6 +17,7 @@ GPIO.setup(FR, GPIO.OUT)
 GPIO.setup(IN1, GPIO.OUT)
 GPIO.setup(IN2, GPIO.OUT)
 GPIO.setup(IN3, GPIO.OUT)
+print(IN4)
 GPIO.setup(IN4, GPIO.OUT)
 
 # setting direction forward
