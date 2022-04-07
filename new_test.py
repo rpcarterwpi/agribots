@@ -7,7 +7,7 @@ IN1, IN2, IN3, IN4 = 22, 24, 26, 36
 
 enc_RL, enc_FL, enc_RR, enc_FR = 16, 18, 11, 13
 
-PWM_FReq = 100
+PWM_Freq = 100
 
 GPIO.setmode(GPIO.BOARD)
 
