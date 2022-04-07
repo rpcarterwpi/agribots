@@ -12,8 +12,6 @@ hub_origin_deg = 34.35103851903750 #deg
 wheel_track = 1
 wheel_radius = 1
 
-
-
 def encoder_estimate(enc_vel, pose, pose_ee_dt):
     FL,FR,RL,RR = enc_vel[0,0],enc_vel[0,1],enc_vel[1,0],enc_vel[1,1]
     omega_l, omega_r = FL if abs(FL) < abs(RL) else RL, FR if abs(FR) < abs(RR) else RR
@@ -64,15 +62,22 @@ def imu_estimate(imu_acc, pose, pose_ie_dt, error_axes):
     error_axes_full = np.array([error_axes_ie,error_axes_ie_dot,error_axes_ie_ddot])
     return(poe_ie_full,error_axes_ie)
 
+def ll2xy(ll,origin_ll,origin_deg,scalers):
+    NE = ((ll[0]-origin_ll[0])*scalers[0],(ll[1]-origin_ll[1])*scalers[1])
+    psi = deg2rad(-origin_deg)
+    x = math.sin(psi)*NE[0] + math.cos(psi)*NE[1]
+    y = math.cos(psi)*NE[0] - math.sin(psi)*NE[1]
+    return (x,y)
 
-def rad2deg(rad):
-    return rad*(180/math.pi)
-
-def deg2rad(deg):
-    return deg*(math.pi/180)
+def xy2ll(xy,origin_ll,origin_deg,scalers):
+    psi = deg2rad(origin_deg)
+    N = math.cos(psi)*xy[1]- math.sin(psi)*xy[1]
+    E = math.sin(psi)*xy[1]+ math.cos(psi)*xy[1]
+    return (origin_ll[0] + (N/scalers[0]),origin_ll[1] + (E/scalers[1]))
 
 def deg2m(pos_gps):
-    mu = deg2rad(pos_gps[0])
+    mu = pos_gps[0]*math.pi/180
+    # constants from wikipedia https://en.wikipedia.org/wiki/Geographic_coordinate_system#Length_of_a_degree
     lat = 111132.92 - 559.82 * math.cos(2*mu) + 1.175 * math.cos(4*mu) -0.0023 * math.cos(6*mu)
     lon = 111412.84 * math.cos(mu) -93.5* math.cos(3*mu) + 0.118 * math.cos(5*mu)
     return (lat,lon)
