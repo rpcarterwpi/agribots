@@ -126,6 +126,7 @@ if __name__ == "__main__":
         try:
             encoder_actions()
             controls_actions()
+            print(motor_efforts)
             # motors_write_raw((IN_write,PWM_write)) #force writing
             # print(enc_vel/(2*math.pi)) # rpm
             # print(motor_error[0,:])
