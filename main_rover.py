@@ -53,7 +53,7 @@ def motors_write_raw(motors_write):
     IN_write = np.array([1,0,1,0])
     PWM_write = np.array([100,100,100,100])
     IN_write, PWM_write = motors_write
-    for i, in_pin in enumerate(IN_pins)
+    for i, in_pin in enumerate(IN_pins):
         GPIO.output(in_pin, GPIO.HIGH if IN_write[i] == 1 else GPIO.LOW)
     for i, pwm_pin in enumerate(PWM_pins):
         PWM_cur = GPIO.PWM(pwm_pin,pwm_freq)
