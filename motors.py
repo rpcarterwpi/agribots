@@ -35,7 +35,8 @@ def motor_init():
     motor_error = np.zeros((3,4))
     pid_t = time.time()
     motor_efforts = np.zeros(4)
-    return (motors_active, drive_mode, ang_vel_desired, motor_error, pid_t, motor_efforts)
+    motor_dir = np.ones(4)
+    return (motors_active, drive_mode, ang_vel_desired, motor_error, pid_t, motor_efforts, motor_dir)
 
 def motor_pid(ang_vel_cur, ang_vel_desired, motor_error, pid_t):
     pid_t_cur = time.time()
@@ -54,9 +55,13 @@ def motor_pid(ang_vel_cur, ang_vel_desired, motor_error, pid_t):
 def control_drive(efforts,drive_mode = DriveMode.DRIVE):
     IN_write = np.zeros(4)
     PWM_write = np.zeros(4)
+    motor_dir = np.ones(4)
     if drive_mode == DriveMode.DRIVE:
         IN_write[0:2] = IN_forward if efforts[0] >= 0 else IN_back
+        motor_dir[0:2] = 1 if efforts[0] >= 0 else -1
+
         IN_write[2:4] = IN_forward if efforts[1] >= 0 else IN_back
+        motor_dir[2:4] = 1 if efforts[1] >= 0 else -1
         PWM_write = np.clip(np.rint(efforts),motors_min_effort,motors_max_effort)
     else:
         if(drive_mode == DriveMode.COAST):
@@ -64,4 +69,4 @@ def control_drive(efforts,drive_mode = DriveMode.DRIVE):
         else:
             IN_write = IN_brake
         PWM_write = np.zeros(4)
-    return (IN_write, PWM_write)
+    return ((IN_write, PWM_write),motor_dir)

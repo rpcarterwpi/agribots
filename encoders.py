@@ -36,7 +36,7 @@ def encoder_init(pose):
     pose_ee_t = time.time()
     return (enc_vel, enc_pos_data, enc_history, pose, turn_ee, pose_ee_t)
 
-def encoder_measure(enc_raw, enc_pos_data, enc_history):
+def encoder_measure(enc_raw, enc_pos_data, enc_history, motor_dir):
     enc_pos, enc_m_i, enc_m_t = enc_pos_data
     enc_d_history, enc_dt_history = enc_history
 
@@ -50,7 +50,7 @@ def encoder_measure(enc_raw, enc_pos_data, enc_history):
 
     enc_tick_per_sec = np.sum(enc_d_history,axis = 0) / np.sum(enc_dt_history)
 
-    enc_vel = enc_tick_per_sec * enc_rot_per_tick * 2 * math.pi
+    enc_vel = (enc_tick_per_sec * enc_rot_per_tick * 2 * math.pi) * motor_dir
 
     return (enc_vel, (enc_raw, enc_m_i_cur, enc_m_t_cur), (enc_d_history, enc_dt_history))
 
