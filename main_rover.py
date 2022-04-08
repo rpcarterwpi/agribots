@@ -45,7 +45,11 @@ def init_pins():
 
 def encoder_read_raw():
     #! comment in with raspi
-    return np.array([GPIO.input(enc_FL),GPIO.input(enc_FR),GPIO.input(enc_RL),GPIO.input(enc_RR)])
+    out = np.zeros(4)
+    for i, pin in enumerate(enc_pins):
+        out[i] = GPIO.input(pin)
+    return out
+    # return np.array([GPIO.input(pin_enc_FL),GPIO.input(pin_enc_FR),GPIO.input(pin_enc_RL),GPIO.input(pin_enc_RR)])
     # return np.random.randint(0,2,4) #dummy random bits
 
 def gps_read_raw():
