@@ -9,7 +9,7 @@ class DriveMode(IntEnum):
     COAST = 3
 
 pid_consts = np.array([100,0,0])
-int_windup = 70
+int_limit = 70
 
 IN_forward = np.array([1,0])
 IN_back = np.array([0,1])
@@ -38,6 +38,20 @@ def motor_init():
     motor_dir = np.ones(4)
     return (motors_active, drive_mode, ang_vel_desired, motor_error, pid_t, motor_efforts, motor_dir)
 
+def integrate_control(error, last_error, last_sum_error, pid_dt):
+    error_int = np.zeros(4)
+    for i in range(4):
+        if not (error[i] == 0 or last_error[i] == 0):
+            if error[i]/abs(error[i]) != last_error[i]/abs(last_error[i]):
+                # integral windup
+                error_int[i] = 0
+            else:
+                error_int[i] = np.clip(last_sum_error + (error * pid_dt), -int_limit, int_limit)
+        else:
+            error_int[i] = np.clip(last_sum_error + (error * pid_dt), -int_limit, int_limit)
+    return error_int
+
+
 def motor_pid(ang_vel_cur, ang_vel_desired, motor_error, pid_t):
     pid_t_cur = time.time()
     pid_dt = pid_t_cur - pid_t
@@ -47,8 +61,12 @@ def motor_pid(ang_vel_cur, ang_vel_desired, motor_error, pid_t):
     print(error)
     # print(ang_vel_desired)
     # print(ang_vel_cur)
-    error_int = np.clip(motor_error[1,:] + (error * pid_dt), -int_windup, int_windup)
-    error_dot = (error - motor_error[0,:] / pid_dt)
+    last_error = motor_error[0,:]
+    last_sum_error = motor_error[1,:]
+
+    error_int = integrate_control(error,last_error,last_sum_error, pid_dt)
+
+    error_dot = (error - last_error) / pid_dt
 
     error_full = np.array([error, error_int, error_dot])
     efforts = error_full.T @ pid_consts
