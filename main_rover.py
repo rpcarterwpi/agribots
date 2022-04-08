@@ -124,6 +124,7 @@ if __name__ == "__main__":
         try:
             # motors_write_raw((IN_write,PWM_write))
             encoder_actions()
+            print(enc_vel/(2*math.pi)) # rpm
             # imu_actions()
             # controls_actions()
 
