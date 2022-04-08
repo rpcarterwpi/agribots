@@ -117,7 +117,7 @@ if __name__ == "__main__":
     motors_active, drive_mode, ang_vel_desired, motor_error, pid_t, motor_efforts, motor_dir = mot.motor_init()
 
     # temporary
-    ang_vel_desired = np.array([0.2,0.2,0.2,0.2])
+    ang_vel_desired = np.array([0,0.1,0,0])
     # IN_write = np.array([1,0,1,0])
     # PWM_write = np.array([100,100,100,100])
 
@@ -132,6 +132,7 @@ if __name__ == "__main__":
         try:
             encoder_actions()
             controls_actions()
+            print('efforts:')
             print(motor_efforts)
             # motors_write_raw((IN_write,PWM_write)) #force writing
             # print(enc_vel/(2*math.pi)) # rpm
