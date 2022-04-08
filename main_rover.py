@@ -131,7 +131,7 @@ if __name__ == "__main__":
     while True:
         try:
             encoder_actions()
-            print(enc_vel)
+            print(motor_error[0,:])
             controls_actions()
             # print('efforts:')
             # print(motor_efforts)
