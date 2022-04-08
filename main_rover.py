@@ -92,8 +92,9 @@ def controls_actions():
         #! maybe change ang_vel_cur = enc_vel????
         motor_efforts, motor_error, pid_t = mot.motor_pid(enc_vel, ang_vel_desired, motor_error, pid_t)
         #! omitting drive_mode for now?????
+        motor_efforts = np.array([100,0,0,0])
         motors_write, motor_dir = mot.control_drive(motor_efforts)
-        # motors_write_raw(motors_write)
+        motors_write_raw(motors_write)
         #! allow one cycle of pwm??????
         # time.sleep(1/pwm_freq)
 
@@ -118,8 +119,7 @@ if __name__ == "__main__":
 
     # temporary
     ang_vel_desired = np.array([0,0.1,0,0])
-    IN_write = np.array([0,1,1,0])
-    PWM_write = np.array([100,0,0,0])
+
 
     # calibrate encoders first
     start_time = time.time() + 10
@@ -132,10 +132,10 @@ if __name__ == "__main__":
         try:
             encoder_actions()
             print(enc_vel)
-            # controls_actions()
+            controls_actions()
             # print('efforts:')
             # print(motor_efforts)
-            motors_write_raw((IN_write,PWM_write)) #force writing
+            # motors_write_raw((IN_write,PWM_write)) #force writing
             # print(enc_vel/(2*math.pi)) # rpm
             # print(motor_error[0,:])
             # print(ang_vel_desire)
