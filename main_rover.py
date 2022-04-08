@@ -127,7 +127,7 @@ if __name__ == "__main__":
             controls_actions()
             motors_write_raw((IN_write,PWM_write)) #force writing
             # print(enc_vel/(2*math.pi)) # rpm
-            print(motor_error)
+            print(motor_efforts)
             # imu_actions()
             # controls_actions()
 
