@@ -93,7 +93,7 @@ def controls_actions():
         motor_efforts, motor_error, pid_t = mot.motor_pid(enc_vel, ang_vel_desired, motor_error, pid_t)
         #! omitting drive_mode for now?????
         motors_write, motor_dir = mot.control_drive(motor_efforts)
-        motors_write_raw(motors_write)
+        # motors_write_raw(motors_write)
         #! allow one cycle of pwm??????
         # time.sleep(1/pwm_freq)
 
@@ -117,7 +117,7 @@ if __name__ == "__main__":
     motors_active, drive_mode, ang_vel_desired, motor_error, pid_t, motor_efforts, motor_dir = mot.motor_init()
 
     # temporary
-    ang_vel_desired = np.array([0,0.2,0,0])
+    ang_vel_desired = np.array([0,0.1,0,0])
     # IN_write = np.array([1,0,1,0])
     # PWM_write = np.array([100,100,100,100])
 
