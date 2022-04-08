@@ -33,7 +33,7 @@ def encoder_init(pose):
     enc_vel = np.zeros(4)
     turn_ee = np.zeros(3)
     pose_ee_t = time.time()
-    tick_count np.zeros(4)
+    tick_count = np.zeros(4)
     return (enc_vel, enc_pos_data, enc_history, pose, turn_ee, pose_ee_t,tick_count)
 
 def encoder_measure(enc_raw, enc_pos_data, enc_history, tick_count):
