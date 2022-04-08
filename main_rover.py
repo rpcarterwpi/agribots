@@ -1,13 +1,21 @@
+# general imports
 import numpy as np
 import math
 import time
 
+# for gps
+import os, sys
+import serial
+
+# written agribots files
 import encoders as enc
 from motors import DriveMode
 import motors as mot
 import imu
 import gps
 import path_planner as path
+
+
 
 
 # uses dependencies like GPIO that cannot be tested easily

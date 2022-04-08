@@ -55,7 +55,7 @@ time_end = time.time() + 5
 a = 0
 while time.time() < time_end:
     try:
-        print(GPIO.input(enc_RL))
+        print(GPIO.input(enc_FL))
     except KeyboardInterupt:
         print('interupted, cleaning up')
         GPIO.cleanup()
