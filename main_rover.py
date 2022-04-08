@@ -77,8 +77,8 @@ def motors_write_raw(motors_write):
 
 # repeated actions
 def encoder_actions():
-    global enc_vel, enc_pos_data, enc_history, pose, pose_ee, turn_ee, pose_ee_t, tick_count
-    enc_vel, enc_pos_data, enc_history, tick_count = enc.encoder_measure(encoder_read_raw(),enc_pos_data,enc_history, tick_count)
+    global enc_vel, enc_pos_data, enc_history, pose, pose_ee, turn_ee, pose_ee_t
+    enc_vel, enc_pos_data, enc_history = enc.encoder_measure(encoder_read_raw(),enc_pos_data,enc_history)
     # TEMPORARY
     # pose_ee, turn_ee, pose_ee_t = enc.encoder_estimate(enc_vel, pose, pose_ee_t)
 
@@ -112,7 +112,7 @@ if __name__ == "__main__":
     init_pins()
     pose = np.zeros((3,3))
 
-    enc_vel, enc_pos_data, enc_history, pose_ee, turn_ee, pose_ee_t, tick_count = enc.encoder_init(pose)
+    enc_vel, enc_pos_data, enc_history, pose_ee, turn_ee, pose_ee_t = enc.encoder_init(pose)
     # imu_data, pose_ie, error_axes, pose_ie_t = imu.imu_init(pose)
     # motors_active, drive_mode, ang_vel_cur, ang_vel_desired, motor_error, pid_t, motor_efforts = mot.motor_init()
     # temporary
@@ -124,7 +124,6 @@ if __name__ == "__main__":
         try:
             # motors_write_raw((IN_write,PWM_write))
             encoder_actions()
-            print(tick_count)
             # imu_actions()
             # controls_actions()
 

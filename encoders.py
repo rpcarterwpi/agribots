@@ -8,7 +8,8 @@ import math
 # number of data points of tick values and time for a moving average velocity
 enc_history_size = 100
 # experimentally determined for each wheel (rotation/tick)
-enc_rot_per_tick =  np.array([0.1,0.101,0.09,0.08])
+# exactly 800 ticks for 20 rotations -> 0.025
+enc_rot_per_tick =  np.array([0.025,0.025,0.025,0.025])
 
 # horizontal distance between center of wheels (m)
 wheel_track = 1
@@ -33,10 +34,9 @@ def encoder_init(pose):
     enc_vel = np.zeros(4)
     turn_ee = np.zeros(3)
     pose_ee_t = time.time()
-    tick_count = np.zeros(4)
-    return (enc_vel, enc_pos_data, enc_history, pose, turn_ee, pose_ee_t,tick_count)
+    return (enc_vel, enc_pos_data, enc_history, pose, turn_ee, pose_ee_t)
 
-def encoder_measure(enc_raw, enc_pos_data, enc_history, tick_count):
+def encoder_measure(enc_raw, enc_pos_data, enc_history):
     enc_pos, enc_m_i, enc_m_t = enc_pos_data
     enc_d_history, enc_dt_history = enc_history
 
@@ -44,7 +44,7 @@ def encoder_measure(enc_raw, enc_pos_data, enc_history, tick_count):
     enc_m_t_cur = time.time()
 
     enc_delta = np.abs(enc_raw - enc_pos)
-    tick_count += enc_delta
+
     enc_d_history[enc_m_i_cur,:] = enc_delta
     enc_dt_history[enc_m_i_cur] = enc_m_t_cur - enc_m_t
 
@@ -52,7 +52,7 @@ def encoder_measure(enc_raw, enc_pos_data, enc_history, tick_count):
 
     enc_vel = enc_tick_per_sec * enc_rot_per_tick * 2 * math.pi
 
-    return (enc_vel, (enc_raw, enc_m_i_cur, enc_m_t_cur), (enc_d_history, enc_dt_history),tick_count)
+    return (enc_vel, (enc_raw, enc_m_i_cur, enc_m_t_cur), (enc_d_history, enc_dt_history))
 
 # pose and pose_ee: (3x3)
     # x,y,theta; d/dt(x,y,theta), d^2/dt(x,y,theta) (m,m,rads)
