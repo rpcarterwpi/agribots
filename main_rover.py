@@ -114,10 +114,11 @@ if __name__ == "__main__":
     IN_write = np.array([1,0,1,0])
     PWM_write = np.array([100,100,100,100])
 
+    motors_write_raw((IN_write,PWM_write))
     while True:
         try:
             # encoder_actions()
-            motors_write_raw((IN_write,PWM_write))
+
             # imu_actions()
             # controls_actions()
 
