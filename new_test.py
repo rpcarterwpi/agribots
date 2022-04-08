@@ -46,9 +46,9 @@ PWM_RL.start(effort)
 PWM_RR.start(effort)
 
 
-def encoder_measure():
-    vals = [GPIO.input(enc_FL),GPIO.input(enc_FR),GPIO.input(enc_RL),GPIO.input(enc_RR)]
-    return vals
+def encoder_measure(enc_pos,):
+    enc_pos_cur = np.array([GPIO.input(enc_FL),GPIO.input(enc_FR),GPIO.input(enc_RL),GPIO.input(enc_RR)])
+
 
 
 time_end = time.time() + 5

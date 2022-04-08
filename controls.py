@@ -23,7 +23,14 @@ enc_vel_cur = np.array([1,2,3,4])
 enc_vel_desired = np.array([2,2,2,2])
 pid_e_t = time.time()
 
-def encoder_measure():
+
+
+def encoder_measure(enc_pos,enc_delta_history,iter):
+    enc_pos_cur = [GPIO.input(enc_FL),GPIO.input(enc_FR),GPIO.input(enc_RL),GPIO.input(enc_RR)]
+    enc_delta_cur = np.abs(enc_pos_cur - enc_pos)
+    # if not np.array_equal(enc_delta_cur,np.zeros(4))
+    # enc_pos_cur = np.array()
+
     # left side and right side must have corresponding directions
     # fl fr rl rr
 
