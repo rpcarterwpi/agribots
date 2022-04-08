@@ -75,6 +75,7 @@ def motors_write_raw(motors_write):
 def encoder_actions():
     global enc_vel, enc_pos_data, enc_history, pose, pose_ee, turn_ee, pose_ee_t
     enc_vel, enc_pos_data, enc_history = enc.encoder_measure(encoder_read_raw(),enc_pos_data,enc_history)
+    # TEMPORARY
     # pose_ee, turn_ee, pose_ee_t = enc.encoder_estimate(enc_vel, pose, pose_ee_t)
 
 def imu_actions():
@@ -118,7 +119,7 @@ if __name__ == "__main__":
     while True:
         try:
             motors_write_raw((IN_write,PWM_write))
-            # encoder_actions()
+            encoder_actions()
 
             # imu_actions()
             # controls_actions()
