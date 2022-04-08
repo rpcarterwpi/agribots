@@ -122,7 +122,7 @@ if __name__ == "__main__":
 
     while True:
         try:
-            motors_write_raw((IN_write,PWM_write))
+            # motors_write_raw((IN_write,PWM_write))
             encoder_actions()
             print(tick_count)
             # imu_actions()
