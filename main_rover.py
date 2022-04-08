@@ -35,6 +35,7 @@ IN_pins = [pin_IN1, pin_IN2, pin_IN3, pin_IN4]
 pwm_freq = 100
 
 def init_pins():
+    GPIO.setmode(GPIO.BOARD)
     for pin in IN_pins:
         GPIO.setup(pin, GPIO.OUT)
     for pin in PWM_pins:
