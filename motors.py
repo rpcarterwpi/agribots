@@ -46,9 +46,9 @@ def integrate_control(error, last_error, last_sum_error, pid_dt):
                 # integral windup
                 error_int[i] = 0
             else:
-                error_int[i] = np.clip(last_sum_error + (error * pid_dt), -int_limit, int_limit)
+                error_int[i] = np.clip(last_sum_error[i] + (error[i] * pid_dt), -int_limit, int_limit)
         else:
-            error_int[i] = np.clip(last_sum_error + (error * pid_dt), -int_limit, int_limit)
+            error_int[i] = np.clip(last_sum_error[i] + (error[i] * pid_dt), -int_limit, int_limit)
     return error_int
 
 
