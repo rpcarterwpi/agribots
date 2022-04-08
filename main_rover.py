@@ -24,6 +24,7 @@ import RPi.GPIO as GPIO
 
 # encoder pins
 pin_enc_RL, pin_enc_FL, pin_enc_RR, pin_enc_FR = 16, 18, 11, 13
+enc_pins = [pin_enc_FL, pin_enc_FR, pin_enc_RL, pin_enc_RR]
 # pwm pins
 pin_motor_RL, pin_motor_FL, pin_motor_RR, pin_motor_FR = 37, 35, 31, 29
 PWM_pins = [pin_motor_RL, pin_motor_FL, pin_motor_RR, pin_motor_FR]
@@ -32,6 +33,14 @@ pin_IN1, pin_IN2, pin_IN3, pin_IN4 = 22, 24, 26, 36
 IN_pins = [pin_IN1, pin_IN2, pin_IN3, pin_IN4]
 
 pwm_freq = 100
+
+def init_pins():
+    for pin in IN_pins:
+        GPIO.setup(pin, GPIO.OUT)
+    for pin in PWM_pins:
+        GPIO.setup(pin, GPIO.OUT)
+    for pin in enc_pins:
+        GPIO.setup(pin, GPIO.IN)
 
 def encoder_read_raw():
     #! comment in with raspi
@@ -93,6 +102,8 @@ def path_planning_actions():
 
 
 if __name__ == "__main__":
+
+    init_pins()
     pose = np.zeros((3,3))
 
     enc_vel, enc_pos_data, enc_history, pose_ee, turn_ee, pose_ee_t = enc.encoder_init(pose)
