@@ -121,6 +121,12 @@ if __name__ == "__main__":
     # IN_write = np.array([1,0,1,0])
     # PWM_write = np.array([100,100,100,100])
 
+    # calibrate encoders first
+    start_time = time.time() + 5
+    print('calibrating')
+    while time.time() < start_time:
+        encoder_actions()
+    print('starting')
 
     while True:
         try:
