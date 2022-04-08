@@ -79,8 +79,7 @@ def motors_write_raw(motors_write):
 def encoder_actions():
     global enc_vel, enc_pos_data, enc_history, pose, pose_ee, turn_ee, pose_ee_t
     enc_vel, enc_pos_data, enc_history = enc.encoder_measure(encoder_read_raw(),enc_pos_data,enc_history)
-    # TEMPORARY
-    # pose_ee, turn_ee, pose_ee_t = enc.encoder_estimate(enc_vel, pose, pose_ee_t)
+    pose_ee, turn_ee, pose_ee_t = enc.encoder_estimate(enc_vel, pose, pose_ee_t)
 
 def imu_actions():
     global imu_data, pose, pose_ie_t, error_axes, pose_ie
@@ -88,12 +87,12 @@ def imu_actions():
     pose_ie, error_axes, pose_ie_t = imu.imu_estimate(imu_data, pose, pose_ie_t, error_axes)
 
 def controls_actions():
-    global motors_active, drive_mode, ang_vel_cur, ang_vel_desired, motor_error, pid_t, motor_efforts
+    global motors_active, drive_mode, enc_vel, ang_vel_desired, motor_error, pid_t, motor_efforts
     if motors_active:
         #! maybe change ang_vel_cur = enc_vel????
-        motor_efforts, motor_error, pid_t = mot.motor_pid(ang_vel_cur, ang_vel_desired, motor_error, pid_t)
+        motor_efforts, motor_error, pid_t = mot.motor_pid(enc_vel, ang_vel_desired, motor_error, pid_t)
         #! omitting drive_mode for now?????
-        motors_write_raw(mot.control_drive(motor_efforts))
+        # motors_write_raw(mot.control_drive(motor_efforts))
         #! allow one cycle of pwm??????
         # time.sleep(1/pwm_freq)
 
@@ -114,17 +113,21 @@ if __name__ == "__main__":
 
     enc_vel, enc_pos_data, enc_history, pose_ee, turn_ee, pose_ee_t = enc.encoder_init(pose)
     # imu_data, pose_ie, error_axes, pose_ie_t = imu.imu_init(pose)
-    # motors_active, drive_mode, ang_vel_cur, ang_vel_desired, motor_error, pid_t, motor_efforts = mot.motor_init()
+    motors_active, drive_mode, ang_vel_desired, motor_error, pid_t, motor_efforts = mot.motor_init()
+
     # temporary
+    ang_vel_desire = np.array([0.2,0.2,0.2,0.2])
     IN_write = np.array([1,0,1,0])
     PWM_write = np.array([100,100,100,100])
 
 
     while True:
         try:
-            motors_write_raw((IN_write,PWM_write))
             encoder_actions()
-            print(enc_vel/(2*math.pi)) # rpm
+            controls_actions()
+            motors_write_raw((IN_write,PWM_write)) #force writing
+            # print(enc_vel/(2*math.pi)) # rpm
+            print(motor_error)
             # imu_actions()
             # controls_actions()
 
