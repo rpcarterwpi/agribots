@@ -33,23 +33,26 @@ def encoder_init(pose):
     enc_vel = np.zeros(4)
     turn_ee = np.zeros(3)
     pose_ee_t = time.time()
-    return (enc_vel, enc_pos_data, enc_history, pose, turn_ee, pose_ee_t)
+    tick_count np.zeros(4)
+    return (enc_vel, enc_pos_data, enc_history, pose, turn_ee, pose_ee_t,tick_count)
 
-def encoder_measure(enc_raw, enc_pos_data, enc_history):
+def encoder_measure(enc_raw, enc_pos_data, enc_history, tick_count):
     enc_pos, enc_m_i, enc_m_t = enc_pos_data
     enc_d_history, enc_dt_history = enc_history
 
     enc_m_i_cur = (enc_m_i+1) % enc_history_size
     enc_m_t_cur = time.time()
 
-    enc_d_history[enc_m_i_cur,:] = np.abs(enc_raw - enc_pos)
+    enc_delta = np.abs(enc_raw - enc_pos)
+    tick_count += enc_delta
+    enc_d_history[enc_m_i_cur,:] = enc_delta
     enc_dt_history[enc_m_i_cur] = enc_m_t_cur - enc_m_t
 
     enc_tick_per_sec = np.sum(enc_d_history,axis = 0) / np.sum(enc_dt_history)
-    print(enc_tick_per_sec)
+
     enc_vel = enc_tick_per_sec * enc_rot_per_tick * 2 * math.pi
 
-    return (enc_vel, (enc_raw, enc_m_i_cur, enc_m_t_cur), (enc_d_history, enc_dt_history))
+    return (enc_vel, (enc_raw, enc_m_i_cur, enc_m_t_cur), (enc_d_history, enc_dt_history),tick_count)
 
 # pose and pose_ee: (3x3)
     # x,y,theta; d/dt(x,y,theta), d^2/dt(x,y,theta) (m,m,rads)
