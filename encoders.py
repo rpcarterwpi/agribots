@@ -46,6 +46,7 @@ def encoder_measure(enc_raw, enc_pos_data, enc_history):
     enc_dt_history[enc_m_i_cur] = enc_m_t_cur - enc_m_t
 
     enc_tick_per_sec = np.sum(enc_d_history,axis = 0) / np.sum(enc_dt_history)
+    print(enc_tick_per_sec)
     enc_vel = enc_tick_per_sec * enc_rot_per_tick * 2 * math.pi
 
     return (enc_vel, (enc_raw, enc_m_i_cur, enc_m_t_cur), (enc_d_history, enc_dt_history))

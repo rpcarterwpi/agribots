@@ -5,7 +5,7 @@ import time
 
 # for gps
 import os, sys
-import serial
+# import serial
 
 # written agribots files
 import encoders as enc
@@ -15,7 +15,8 @@ import imu
 import gps
 import path_planner as path
 
-
+# for raspi
+import RPi.GPIO as GPIO
 
 
 # uses dependencies like GPIO that cannot be tested easily
@@ -34,8 +35,8 @@ pwm_freq = 100
 
 def encoder_read_raw():
     #! comment in with raspi
-    # return np.array([GPIO.input(enc_FL),GPIO.input(enc_FR),GPIO.input(enc_RL),GPIO.input(enc_RR)])
-    return np.random.randint(0,2,4) #dummy random bits
+    return np.array([GPIO.input(enc_FL),GPIO.input(enc_FR),GPIO.input(enc_RL),GPIO.input(enc_RR)])
+    # return np.random.randint(0,2,4) #dummy random bits
 
 def gps_read_raw():
     pass
@@ -49,21 +50,24 @@ def imu_read_raw():
 
 def motors_write_raw(motors_write):
     #! comment in with raspi
-    # IN_write, PWM_write = motors_write
-    # for i, in_pin in enumerate(IN_pins)
-    #     GPIO.output(in_pin, GPIO.HIGH if IN_write[0] == 1 else GPIO.LOW)
-    # for i, pwm_pin in enumerate(PWM_pins):
-    #     PWM_cur = GPIO.PWM(pwm_pin,pwm_freq)
-    #     PWM_cur.start(PWM_write[i])
-    print('writing motors:')
-    print(motors_write)
+    IN_write = np.array([1,0,1,0])
+    PWM_write = np.array([100,100,100,100])
+    IN_write, PWM_write = motors_write
+    for i, in_pin in enumerate(IN_pins)
+        GPIO.output(in_pin, GPIO.HIGH if IN_write[i] == 1 else GPIO.LOW)
+    for i, pwm_pin in enumerate(PWM_pins):
+        PWM_cur = GPIO.PWM(pwm_pin,pwm_freq)
+        PWM_cur.start(PWM_write[i])
+    time.sleep(1/pwm_freq)
+    # print('writing motors:')
+    # print(motors_write)
     # pass
 
 # repeated actions
 def encoder_actions():
     global enc_vel, enc_pos_data, enc_history, pose, pose_ee, turn_ee, pose_ee_t
     enc_vel, enc_pos_data, enc_history = enc.encoder_measure(encoder_read_raw(),enc_pos_data,enc_history)
-    pose_ee, turn_ee, pose_ee_t = enc.encoder_estimate(enc_vel, pose, pose_ee_t)
+    # pose_ee, turn_ee, pose_ee_t = enc.encoder_estimate(enc_vel, pose, pose_ee_t)
 
 def imu_actions():
     global imu_data, pose, pose_ie_t, error_axes, pose_ie
@@ -94,17 +98,17 @@ if __name__ == "__main__":
     pose = np.zeros((3,3))
 
     enc_vel, enc_pos_data, enc_history, pose_ee, turn_ee, pose_ee_t = enc.encoder_init(pose)
-    imu_data, pose_ie, error_axes, pose_ie_t = imu.imu_init(pose)
-    motors_active, drive_mode, ang_vel_cur, ang_vel_desired, motor_error, pid_t, motor_efforts = mot.motor_init()
+    # imu_data, pose_ie, error_axes, pose_ie_t = imu.imu_init(pose)
+    # motors_active, drive_mode, ang_vel_cur, ang_vel_desired, motor_error, pid_t, motor_efforts = mot.motor_init()
 
     while True:
         try:
-            encoder_actions()
-            imu_actions()
-            controls_actions()
-            # print(pose_ie[0,:])
-            # print(enc_vel)
-            # print(pose_ee)
+            # encoder_actions()
+            motors_write_raw()
+            # imu_actions()
+            # controls_actions()
+
+
         except KeyboardInterrupt:
             print(': interupted, cleaning up')
             break
