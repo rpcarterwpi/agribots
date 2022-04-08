@@ -50,8 +50,6 @@ def imu_read_raw():
 
 def motors_write_raw(motors_write):
     #! comment in with raspi
-    IN_write = np.array([1,0,1,0])
-    PWM_write = np.array([100,100,100,100])
     IN_write, PWM_write = motors_write
     for i, in_pin in enumerate(IN_pins):
         GPIO.output(in_pin, GPIO.HIGH if IN_write[i] == 1 else GPIO.LOW)
@@ -100,11 +98,14 @@ if __name__ == "__main__":
     enc_vel, enc_pos_data, enc_history, pose_ee, turn_ee, pose_ee_t = enc.encoder_init(pose)
     # imu_data, pose_ie, error_axes, pose_ie_t = imu.imu_init(pose)
     # motors_active, drive_mode, ang_vel_cur, ang_vel_desired, motor_error, pid_t, motor_efforts = mot.motor_init()
+    # temporary
+    IN_write = np.array([1,0,1,0])
+    PWM_write = np.array([100,100,100,100])
 
     while True:
         try:
             # encoder_actions()
-            motors_write_raw()
+            motors_write_raw((IN_write,PWM_write))
             # imu_actions()
             # controls_actions()
 
