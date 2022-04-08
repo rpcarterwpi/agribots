@@ -4,6 +4,7 @@ import time
 
 import encoders as enc
 import motors as mot
+import imu
 
 
 # uses dependencies like GPIO that cannot be tested easily
@@ -28,7 +29,10 @@ def gps_read_raw():
     pass
 
 def imu_read_raw():
-    pass
+    # ax,ay,az,wx,wy,wz = MPU6050_conv() # read and convert mpu6050 data
+    # mx,my,mz = AK8963_conv() # read and convert AK8963 magnetometer data
+    # return np.array([ax, ay, az, wx, wy, wz, mx, my, mz])
+    return np.array([0,1,2,3,4,5,6,7,8])
 
 def motors_write_raw(motors_write):
     # IN_write, PWM_write = motors_write
@@ -37,7 +41,9 @@ def motors_write_raw(motors_write):
     # for i, pwm_pin in enumerate(PWM_pins):
     #     PWM_cur = GPIO.PWM(pwm_pin,pwm_freq)
     #     PWM_cur.start(PWM_write[i])
-    pass
+    print('writing motors:')
+    print(motors_write)
+    # pass
 
 # repeated actions
 def encoder_actions():
@@ -45,22 +51,35 @@ def encoder_actions():
     enc_vel, enc_pos_data, enc_history = enc.encoder_measure(encoder_read_raw(),enc_pos_data,enc_history)
     pose_ee, turn_ee, pose_ee_t = enc.encoder_estimate(enc_vel, pose, pose_ee_t)
 
+def imu_actions():
+    global imu_data, pose, pose_ie_t, error_axes, pose_ie
+    imu_data = imu_read_raw()
+    pose_ie, error_axes, pose_ie_t = imu.imu_estimate(imu_data, pose, pose_ie_t, error_axes)
+
 def controls_actions():
+
+    pass
+
+def localization_actions():
+    # fusion of pos_ee, pose_ie, pose_ge to pose
     pass
 
 
 
 if __name__ == "__main__":
     pose = np.zeros((3,3))
-    enc_vel, enc_pos_data, enc_history, pose_ee, turn_ee, pose_ee_t = enc.encoder_init(pose)
 
+    enc_vel, enc_pos_data, enc_history, pose_ee, turn_ee, pose_ee_t = enc.encoder_init(pose)
+    imu_data, pose_ie, error_axes, pose_ie_t = imu.imu_init(pose)
     # ang_vel_cur, ang_vel_desired, motor_error, pid_t, motor_efforts = mot.motor_init()
 
     while True:
         try:
             encoder_actions()
-            print(enc_vel)
-            print(pose_ee[0,:])
+            imu_actions()
+            print(pose_ie[0,:])
+            # print(enc_vel)
+            # print(pose_ee)
         except KeyboardInterrupt:
             print(': interupted, cleaning up')
             break
