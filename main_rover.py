@@ -118,7 +118,7 @@ if __name__ == "__main__":
 
     # temporary
     ang_vel_desired = np.array([0,0.1,0,0])
-    IN_write = np.array([1,0,1,0])
+    IN_write = np.array([0,1,1,0])
     PWM_write = np.array([100,0,0,0])
 
     # calibrate encoders first
