@@ -130,7 +130,6 @@ if __name__ == "__main__":
             # print(enc_vel/(2*math.pi)) # rpm
             # print(motor_error[0,:])
             # print(ang_vel_desire)
-            print(enc_vel)
             # imu_actions()
             # controls_actions()
 
