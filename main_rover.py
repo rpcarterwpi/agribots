@@ -66,7 +66,7 @@ def motors_write_raw(motors_write):
     for i, pwm_pin in enumerate(PWM_pins):
         PWM_cur = GPIO.PWM(pwm_pin,pwm_freq)
         PWM_cur.start(PWM_write[i])
-    time.sleep(1/pwm_freq)
+        time.sleep(1/pwm_freq)
     # print('writing motors:')
     # print(motors_write)
     # pass
@@ -114,10 +114,10 @@ if __name__ == "__main__":
     IN_write = np.array([1,0,1,0])
     PWM_write = np.array([100,100,100,100])
 
-    motors_write_raw((IN_write,PWM_write))
+
     while True:
         try:
-            a = 1
+            motors_write_raw((IN_write,PWM_write))
             # encoder_actions()
 
             # imu_actions()
