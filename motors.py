@@ -28,9 +28,13 @@ motors_max_effort = 100
 
 
 def motor_init():
+    motors_active = True
+    ang_vel_cur = np.zeros(4)
+    ang_vel_desired = np.zeros(4)
     motor_error = np.zeros(3,4)
     pid_t = time.time()
-    return (ang_vel_cur, ang_vel_desired, motor_error, pid_t, motor_efforts)
+    motor_efforts = np.zeros(4)
+    return (motors_active, ang_vel_cur, ang_vel_desired, motor_error, pid_t, motor_efforts)
 
 def motor_pid(ang_vel_cur, ang_vel_desired, motor_error, pid_t):
     pid_t_cur = time.time()

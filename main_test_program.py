@@ -5,6 +5,8 @@ import time
 import encoders as enc
 import motors as mot
 import imu
+import gps
+import path_planner as path
 
 
 # uses dependencies like GPIO that cannot be tested easily
@@ -57,6 +59,10 @@ def imu_actions():
     pose_ie, error_axes, pose_ie_t = imu.imu_estimate(imu_data, pose, pose_ie_t, error_axes)
 
 def controls_actions():
+    global motors_active, ang_vel_cur, ang_vel_desired, motor_error, pid_t, motor_efforts
+    if motor_active:
+        mot.motor_pid()
+        mot.control_drive()
 
     pass
 
@@ -71,7 +77,7 @@ if __name__ == "__main__":
 
     enc_vel, enc_pos_data, enc_history, pose_ee, turn_ee, pose_ee_t = enc.encoder_init(pose)
     imu_data, pose_ie, error_axes, pose_ie_t = imu.imu_init(pose)
-    # ang_vel_cur, ang_vel_desired, motor_error, pid_t, motor_efforts = mot.motor_init()
+    motors_active, ang_vel_cur, ang_vel_desired, motor_error, pid_t, motor_efforts = mot.motor_init()
 
     while True:
         try:
