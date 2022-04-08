@@ -8,7 +8,7 @@ class DriveMode(IntEnum):
     BRAKE = 2
     COAST = 3
 
-pid_consts = np.array([100,0,0])
+pid_consts = np.array([3000,1,0])
 int_limit = 70
 
 IN_forward = np.array([1,0])
