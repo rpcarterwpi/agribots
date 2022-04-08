@@ -57,8 +57,8 @@ def motor_pid(ang_vel_cur, ang_vel_desired, motor_error, pid_t):
     pid_dt = pid_t_cur - pid_t
 
     error = ang_vel_desired - ang_vel_cur
-    print('error:')
-    print(error)
+    # print('error:')
+    # print(error)
     # print(ang_vel_desired)
     # print(ang_vel_cur)
     last_error = motor_error[0,:]
