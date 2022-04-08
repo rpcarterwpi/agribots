@@ -78,10 +78,12 @@ def control_drive(efforts,drive_mode = DriveMode.DRIVE):
     motor_dir = np.ones(4)
     if drive_mode == DriveMode.DRIVE:
         IN_write[0:2] = IN_forward if efforts[0] >= 0 else IN_back
-        motor_dir[0:2] = 1 if efforts[0] >= 0 else -1
+        motor_dir[0] = 1 if efforts[0] >= 0 else -1
+        motor_dir[2] = 1 if efforts[0] >= 0 else -1
 
         IN_write[2:4] = IN_forward if efforts[1] >= 0 else IN_back
-        motor_dir[2:4] = 1 if efforts[1] >= 0 else -1
+        motor_dir[1] = 1 if efforts[1] >= 0 else -1
+        motor_dir[3] = 1 if efforts[1] >= 0 else -1
 
         PWM_write = np.clip(np.rint(np.abs(efforts)),motors_min_effort,motors_max_effort)
     else:
