@@ -117,6 +117,7 @@ if __name__ == "__main__":
     motors_write_raw((IN_write,PWM_write))
     while True:
         try:
+            a = 1
             # encoder_actions()
 
             # imu_actions()
