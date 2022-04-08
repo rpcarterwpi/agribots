@@ -118,8 +118,8 @@ if __name__ == "__main__":
 
     # temporary
     ang_vel_desired = np.array([0,0.1,0,0])
-    # IN_write = np.array([1,0,1,0])
-    # PWM_write = np.array([100,100,100,100])
+    IN_write = np.array([1,0,1,0])
+    PWM_write = np.array([100,0,0,0])
 
     # calibrate encoders first
     start_time = time.time() + 10
@@ -130,11 +130,11 @@ if __name__ == "__main__":
 
     while True:
         try:
-            encoder_actions()
-            controls_actions()
+            # encoder_actions()
+            # controls_actions()
             print('efforts:')
             print(motor_efforts)
-            # motors_write_raw((IN_write,PWM_write)) #force writing
+            motors_write_raw((IN_write,PWM_write)) #force writing
             # print(enc_vel/(2*math.pi)) # rpm
             # print(motor_error[0,:])
             # print(ang_vel_desire)
