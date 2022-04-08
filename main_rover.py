@@ -92,7 +92,7 @@ def controls_actions():
         #! maybe change ang_vel_cur = enc_vel????
         motor_efforts, motor_error, pid_t = mot.motor_pid(enc_vel, ang_vel_desired, motor_error, pid_t)
         #! omitting drive_mode for now?????
-        motor_efforts = np.array([100,0,0,0])
+        motor_efforts = np.array([-100,0,0,0])
         motors_write, motor_dir = mot.control_drive(motor_efforts)
         motors_write_raw(motors_write)
         #! allow one cycle of pwm??????
