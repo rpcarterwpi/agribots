@@ -90,8 +90,9 @@ def encoder_actions():
 
 def imu_actions():
     global imu_data, pose, pose_ie_t, error_axes, pose_ie
-    imu_data = imu_read_raw()
-    pose_ie, error_axes, pose_ie_t = imu.imu_estimate(imu_data, pose, pose_ie_t, error_axes)
+    # imu_data = imu_read_raw()
+    # pose_ie, error_axes, pose_ie_t = imu.imu_estimate(imu_data, pose, pose_ie_t, error_axes)
+    pass
 
 def controls_actions():
     global motors_active, drive_mode, enc_vel, ang_vel_desired, motor_error, pid_t, motor_efforts, motor_dir
@@ -146,7 +147,7 @@ if __name__ == "__main__":
             # localization_actions()
 
             imu_read_raw()
-            imu_actions()
+            # imu_actions()
 
 
             # print('error')
