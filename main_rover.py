@@ -137,12 +137,12 @@ if __name__ == "__main__":
 
             # print('desired')
             # print(ang_vel_desired)
-            # print('actual')
+            print(f'actual: {enc_vel[1]}, error: {motor_error[0,1]}, effort: {motor_efforts[1]}')
             # print(enc_vel)
             # print('error')
             # print(motor_error[0,:])
             # print('efforts')
-            print(motor_efforts[1])
+            # print(motor_efforts[1])
 
             # print('efforts:')
             # print(motor_efforts)
