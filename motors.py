@@ -53,6 +53,8 @@ def integrate_control(error, last_error, last_sum_error, pid_dt):
 
 
 def motor_pid(ang_vel_cur, ang_vel_desired, motor_error, pid_t, motor_efforts):
+    motor_efforts = np.abs(motor_efforts)
+
     motor_dir = np.ones(4)
     motor_dir[0] = 1 if ang_vel_desired[0] >= 0 else -1
     motor_dir[2] = motor_dir[0]
