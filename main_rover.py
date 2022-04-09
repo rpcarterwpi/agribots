@@ -141,8 +141,8 @@ if __name__ == "__main__":
             # print(enc_vel)
             # print('error')
             # print(motor_error[0,:])
-            print('efforts')
-            print(motor_efforts)
+            # print('efforts')
+            print(motor_efforts[1])
 
             # print('efforts:')
             # print(motor_efforts)
