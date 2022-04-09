@@ -10,7 +10,7 @@ class DriveMode(IntEnum):
 
 # pid_consts = np.array([300,2,2])
 pid_consts = np.array([64,1,0])
-int_limit = 100000
+int_limit = 100
 
 IN_forward = np.array([1,0])
 IN_back = np.array([0,1])
@@ -77,7 +77,7 @@ def motor_pid(ang_vel_cur, ang_vel_desired, motor_error, pid_t):
     error_dot = (error - last_error) / pid_dt
 
     error_full = np.array([error, error_int, error_dot])
-    efforts = np.abs((error_full.T @ pid_consts)) * motor_dir
+    efforts = np.clip((error_full.T @ pid_consts),0,100) * motor_dir
     return (efforts, error_full, pid_t)
 
 def control_drive(efforts,drive_mode = DriveMode.DRIVE):
