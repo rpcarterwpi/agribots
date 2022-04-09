@@ -67,6 +67,7 @@ def imu_read_raw():
     # # return np.array([0,1,2,3,4,5,6,7,8])
     mx,my,mz = AK8963_conv() # read and convert AK8963 magnetometer data
     data = np.array([mx,my,mz])
+    print(data)
 
 def motors_write_raw(motors_write):
     #! comment in with raspi
