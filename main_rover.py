@@ -122,7 +122,7 @@ if __name__ == "__main__":
 
 
     # calibrate encoders first
-    start_time = time.time() + 10
+    start_time = time.time() + 1
     print('calibrating')
     while time.time() < start_time:
         encoder_actions()
