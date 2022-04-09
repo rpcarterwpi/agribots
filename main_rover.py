@@ -93,7 +93,6 @@ def imu_actions():
     imu_mag_data = imu_read_raw()
     imu.imu_mag(imu_mag_data)
     # pose_ie, error_axes, pose_ie_t = imu.imu_estimate(imu_data, pose, pose_ie_t, error_axes)
-    pass
 
 def controls_actions():
     global motors_active, drive_mode, enc_vel, ang_vel_desired, motor_error, pid_t, motor_efforts, motor_dir
@@ -148,7 +147,7 @@ if __name__ == "__main__":
             # localization_actions()
 
             imu_read_raw()
-            # imu_actions()
+            imu_actions()
 
 
             # print('error')
