@@ -140,7 +140,7 @@ if __name__ == "__main__":
             print('actual')
             print(enc_vel)
             print('error')
-            print(motor_errors[0,:])
+            print(motor_error[0,:])
             print('efforts')
             print(motor_efforts)
 
