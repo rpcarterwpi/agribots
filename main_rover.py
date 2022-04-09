@@ -66,9 +66,8 @@ def imu_read_raw():
     # print(data)
     # # return np.array([0,1,2,3,4,5,6,7,8])
     mx,my,mz = AK8963_conv() # read and convert AK8963 magnetometer data
-    data = np.array([mx,my,mz])
-    deg = math.atan2(mx,my) * (180/math.pi)
-    print(deg)
+    # data = np.array([mx,my,mz])
+    return np.array([mx,my,mz])
 
 def motors_write_raw(motors_write):
     #! comment in with raspi
@@ -91,7 +90,8 @@ def encoder_actions():
 
 def imu_actions():
     global imu_data, pose, pose_ie_t, error_axes, pose_ie
-    # imu_data = imu_read_raw()
+    imu_mag_data = imu_read_raw()
+    imu.imu_mag(imu_mag_data)
     # pose_ie, error_axes, pose_ie_t = imu.imu_estimate(imu_data, pose, pose_ie_t, error_axes)
     pass
 

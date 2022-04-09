@@ -9,6 +9,12 @@ def imu_init(pose):
     pose_ie_t = time.time()
     return(imu_data, pose_ie, error_axes, pose_ie_t)
 
+def imu_mag(mag_data):
+    mx, my, mz = mag_data
+    deg = math.atan2(mx,my) * (180/math.pi)
+    print(deg)
+
+
 def imu_estimate(imu_data, pose, pose_ie_t, error_axes):
     pose_ie_t_cur = time.time()
     pose_ie_dt = pose_ie_t_cur - pose_ie_t
@@ -30,5 +36,5 @@ def imu_estimate(imu_data, pose, pose_ie_t, error_axes):
     error_axes_ie = error_axes[0,:] + (error_axes_ie_dot * pose_ie_dt)
 
     error_axes_full = np.array([error_axes_ie,error_axes_ie_dot,error_axes_ie_ddot])
-    
+
     return(pose_ie_full,error_axes_full, pose_ie_t_cur)
