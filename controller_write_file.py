@@ -47,7 +47,7 @@ class MyController(Controller):
 
     def write_vals(self):
         f = open('actions.txt', 'w')
-        f.write(str(self.cur_effort_L))
+        f.write(str(self.cur_effort_L)+'\n')
         f.write(str(self.cur_effort_R))
 
         # f.write(str(self.cur_effort_L)+'\n')
