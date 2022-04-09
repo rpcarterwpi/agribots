@@ -15,7 +15,7 @@ import imu
 import gps
 import path_planner as path
 
-# from mpu9250_i2c import *
+from mpu9250_i2c import *
 
 # for raspi
 import RPi.GPIO as GPIO
@@ -58,13 +58,15 @@ def gps_read_raw():
     pass
 
 def imu_read_raw():
-    #! comment in with raspi
-    ax,ay,az,wx,wy,wz = MPU6050_conv() # read and convert mpu6050 data
+    # #! comment in with raspi
+    # ax,ay,az,wx,wy,wz = MPU6050_conv() # read and convert mpu6050 data
+    # mx,my,mz = AK8963_conv() # read and convert AK8963 magnetometer data
+    # data = np.array([ax, ay, az, wx, wy, wz, mx, my, mz])
+    # # return
+    # print(data)
+    # # return np.array([0,1,2,3,4,5,6,7,8])
     mx,my,mz = AK8963_conv() # read and convert AK8963 magnetometer data
-    data = np.array([ax, ay, az, wx, wy, wz, mx, my, mz])
-    # return
-    print(data)
-    # return np.array([0,1,2,3,4,5,6,7,8])
+    data = np.array([mx,my,mz])
 
 def motors_write_raw(motors_write):
     #! comment in with raspi
