@@ -69,6 +69,13 @@ class MyController(Controller):
         print(self.cur_effort_L)
         self.write_vals()
 
+    def on_R2_press(self,value):
+        effort = MAX_SPEED*normalize_joystick(False,value)
+        self.cur_effort_R = effort
+        print(self.cur_effort_R)
+        self.write_vals()
+
+
     def on_L3_right(self,value):
         a = 1
 
