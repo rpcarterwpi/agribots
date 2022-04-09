@@ -58,7 +58,7 @@ def motor_pid(ang_vel_cur, ang_vel_desired, motor_error, pid_t, motor_efforts):
     motor_dir[2] = motor_dir[0]
     motor_dir[1] = 1 if ang_vel_desired[1] >= 0 else -1
     motor_dir[3] = motor_dir[1]
-
+    print(motor_dir)
     ang_vel_desired = np.abs(ang_vel_desired)
 
     pid_t_cur = time.time()
