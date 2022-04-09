@@ -57,10 +57,12 @@ def gps_read_raw():
 
 def imu_read_raw():
     #! comment in with raspi
-    # ax,ay,az,wx,wy,wz = MPU6050_conv() # read and convert mpu6050 data
-    # mx,my,mz = AK8963_conv() # read and convert AK8963 magnetometer data
-    # return np.array([ax, ay, az, wx, wy, wz, mx, my, mz])
-    return np.array([0,1,2,3,4,5,6,7,8])
+    ax,ay,az,wx,wy,wz = MPU6050_conv() # read and convert mpu6050 data
+    mx,my,mz = AK8963_conv() # read and convert AK8963 magnetometer data
+    data = np.array([ax, ay, az, wx, wy, wz, mx, my, mz])
+    # return
+    print(data)
+    # return np.array([0,1,2,3,4,5,6,7,8])
 
 def motors_write_raw(motors_write):
     #! comment in with raspi
@@ -116,7 +118,7 @@ if __name__ == "__main__":
     pose = np.zeros((3,3))
 
     enc_vel, enc_pos_data, enc_history, pose_ee, turn_ee, pose_ee_t = enc.encoder_init(pose)
-    
+
     imu_data, pose_ie, error_axes, pose_ie_t = imu.imu_init(pose)
 
     motors_active, drive_mode, ang_vel_desired, motor_error, pid_t, motor_efforts, motor_dir = mot.motor_init()
