@@ -153,7 +153,7 @@ if __name__ == "__main__":
 
             imu_read_raw()
             imu_actions()
-            print(f'mag: {cur_heading}, theta: {pose[0,2]*(180/math.pi)})
+            print(f'mag: {cur_heading}, theta: {pose[0,2]*(180/math.pi)}')
             # print(cur_heading)
 
 
