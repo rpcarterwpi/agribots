@@ -141,9 +141,9 @@ if __name__ == "__main__":
             # print('desired')
             # print(ang_vel_desired)
             # print(f'actual: {round(enc_vel[1],2)}, error: {round(motor_error[0,1],2)}, effort: {round(motor_efforts[1],2)}')
-            print(enc_vel)
+            # print(enc_vel)
 
-            # print(pose_ee[0,:])
+            print(pose[0,:])
             # print('error')
             # print(motor_error[0,:])
             # print('efforts')
