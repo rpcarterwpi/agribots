@@ -116,7 +116,9 @@ if __name__ == "__main__":
     pose = np.zeros((3,3))
 
     enc_vel, enc_pos_data, enc_history, pose_ee, turn_ee, pose_ee_t = enc.encoder_init(pose)
-    # imu_data, pose_ie, error_axes, pose_ie_t = imu.imu_init(pose)
+    
+    imu_data, pose_ie, error_axes, pose_ie_t = imu.imu_init(pose)
+
     motors_active, drive_mode, ang_vel_desired, motor_error, pid_t, motor_efforts, motor_dir = mot.motor_init()
 
     # temporary
@@ -132,9 +134,13 @@ if __name__ == "__main__":
 
     while True:
         try:
-            encoder_actions()
-            controls_actions()
-            localization_actions()
+            # encoder_actions()
+            # controls_actions()
+            # localization_actions()
+
+
+            imu_actions()
+
             # print('error')
             # print(motor_error[0,:])
 
@@ -143,7 +149,7 @@ if __name__ == "__main__":
             # print(f'actual: {round(enc_vel[1],2)}, error: {round(motor_error[0,1],2)}, effort: {round(motor_efforts[1],2)}')
             # print(enc_vel)
 
-            print(pose[0,:])
+            # print(pose[0,:])
             # print('error')
             # print(motor_error[0,:])
             # print('efforts')
