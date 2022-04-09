@@ -171,7 +171,7 @@ if __name__ == "__main__":
             # imu_actions()
 
             read_vals()
-            print(ang_vel_desired)
+            # print(ang_vel_desired)
 
 
             # print(f'mag: {cur_heading}, theta: {pose[0,2]*(180/math.pi)}')
