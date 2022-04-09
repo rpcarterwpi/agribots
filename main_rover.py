@@ -118,7 +118,7 @@ if __name__ == "__main__":
     motors_active, drive_mode, ang_vel_desired, motor_error, pid_t, motor_efforts = mot.motor_init()
 
     # temporary
-    ang_vel_desired = np.array([1,1,1,1])
+    ang_vel_desired = np.array([0,1,0,0])
 
 
     # calibrate encoders first
@@ -139,8 +139,10 @@ if __name__ == "__main__":
             # print(ang_vel_desired)
             print('actual')
             print(enc_vel)
-            # print('efforts')
-            # print(motor_efforts)
+            print('error')
+            print(motor_errors[0,:])
+            print('efforts')
+            print(motor_efforts)
 
             # print('efforts:')
             # print(motor_efforts)
