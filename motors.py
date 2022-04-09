@@ -36,7 +36,8 @@ def motor_init():
     motor_error = np.zeros((3,4))
     pid_t = time.time()
     motor_efforts = np.zeros(4)
-    return (motors_active, drive_mode, ang_vel_desired, motor_error, pid_t, motor_efforts)
+    motor_dir = np.ones(4)
+    return (motors_active, drive_mode, ang_vel_desired, motor_error, pid_t, motor_efforts, motor_dir)
 
 def integrate_control(error, last_error, last_sum_error, pid_dt):
     error_int = np.zeros(4)
@@ -62,6 +63,7 @@ def motor_pid(ang_vel_cur, ang_vel_desired, motor_error, pid_t, motor_efforts):
     motor_dir[3] = motor_dir[1]
     print(motor_dir)
     ang_vel_desired = np.abs(ang_vel_desired)
+    ang_vel_cur = np.abs(ang_vel_cur)
 
     pid_t_cur = time.time()
     pid_dt = pid_t_cur - pid_t
@@ -81,7 +83,7 @@ def motor_pid(ang_vel_cur, ang_vel_desired, motor_error, pid_t, motor_efforts):
     error_full = np.array([error, error_int, error_dot])
     efforts = np.clip((error_full.T @ pid_consts),-100,100)
     efforts = np.clip((motor_efforts + efforts),0,100) * motor_dir
-    return (efforts, error_full, pid_t)
+    return (efforts, error_full, pid_t, motor_dir)
 
 def control_drive(efforts,drive_mode = DriveMode.DRIVE):
     IN_write = np.zeros(4)

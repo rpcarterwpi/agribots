@@ -77,8 +77,8 @@ def motors_write_raw(motors_write):
 
 # repeated actions
 def encoder_actions():
-    global enc_vel, enc_pos_data, enc_history, pose, pose_ee, turn_ee, pose_ee_t
-    enc_vel, enc_pos_data, enc_history = enc.encoder_measure(encoder_read_raw(),enc_pos_data,enc_history)
+    global enc_vel, enc_pos_data, enc_history, pose, pose_ee, turn_ee, pose_ee_t, motor_dir
+    enc_vel, enc_pos_data, enc_history = enc.encoder_measure(encoder_read_raw(),enc_pos_data,enc_history, motor_dir)
     pose_ee, turn_ee, pose_ee_t = enc.encoder_estimate(enc_vel, pose, pose_ee_t)
 
 def imu_actions():
@@ -87,10 +87,10 @@ def imu_actions():
     pose_ie, error_axes, pose_ie_t = imu.imu_estimate(imu_data, pose, pose_ie_t, error_axes)
 
 def controls_actions():
-    global motors_active, drive_mode, enc_vel, ang_vel_desired, motor_error, pid_t, motor_efforts
+    global motors_active, drive_mode, enc_vel, ang_vel_desired, motor_error, pid_t, motor_efforts, motor_dir
     if motors_active:
         #! maybe change ang_vel_cur = enc_vel????
-        motor_efforts, motor_error, pid_t = mot.motor_pid(enc_vel, ang_vel_desired, motor_error, pid_t, motor_efforts)
+        motor_efforts, motor_error, pid_t, motor_dir, motor_dir = mot.motor_pid(enc_vel, ang_vel_desired, motor_error, pid_t, motor_efforts)
         #! omitting drive_mode for now?????
         # motor_efforts = np.array([-100,100,-100,100])
         motors_write = mot.control_drive(motor_efforts)
@@ -117,7 +117,7 @@ if __name__ == "__main__":
 
     enc_vel, enc_pos_data, enc_history, pose_ee, turn_ee, pose_ee_t = enc.encoder_init(pose)
     # imu_data, pose_ie, error_axes, pose_ie_t = imu.imu_init(pose)
-    motors_active, drive_mode, ang_vel_desired, motor_error, pid_t, motor_efforts = mot.motor_init()
+    motors_active, drive_mode, ang_vel_desired, motor_error, pid_t, motor_dir motor_efforts = mot.motor_init()
 
     # temporary
     ang_vel_desired = np.array([1.6,-1.6,1.6,-1.6])
