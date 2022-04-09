@@ -123,17 +123,17 @@ def read_vals():
     f = open('actions.txt', 'r')
     lines = f.read().split('\n')
     lines = lines[0:min(2,len(lines))]
-    for i, line in enumerate(lines):
-        if i == 0:
-            ang_vel_desired[0] = float(line)
-            ang_vel_desired[2] = float(line)
+    try:
+        for i, line in enumerate(lines):
+            if i == 0:
+                ang_vel_desired[0] = float(line)
+                ang_vel_desired[2] = float(line)
 
-        elif i == 1:
-            ang_vel_desired[1] = float(line)
-            ang_vel_desired[3] = float(line)
-
-        except:
-            print('cannot_read')
+            elif i == 1:
+                ang_vel_desired[1] = float(line)
+                ang_vel_desired[3] = float(line)
+    except:
+        print('cannot_read')
 
 
 if __name__ == "__main__":
