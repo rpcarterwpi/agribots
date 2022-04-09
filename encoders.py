@@ -6,7 +6,7 @@ import math
 # Front Left, Front Right, Rear Left, Rear Right
 
 # number of data points of tick values and time for a moving average velocity
-enc_history_size = 100
+enc_history_size = 15
 # experimentally determined for each wheel (rotation/tick)
 # exactly 800 ticks for 20 rotations -> 0.025
 enc_rot_per_tick =  np.array([0.025,0.025,0.025,0.025])
