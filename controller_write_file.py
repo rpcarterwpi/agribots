@@ -70,7 +70,7 @@ class MyController(Controller):
         self.write_vals()
 
     def on_R2_press(self,value):
-        effort = MAX_SPEED*normalize_joystick(False,value)
+        effort = MAX_SPEED*normalize_joystick(True,value)
         self.cur_effort_R = effort
         print(self.cur_effort_R)
         self.write_vals()
