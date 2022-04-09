@@ -15,7 +15,7 @@ import imu
 import gps
 import path_planner as path
 
-from mpu9250_i2c import *
+# from mpu9250_i2c import *
 
 # for raspi
 import RPi.GPIO as GPIO
