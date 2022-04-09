@@ -137,10 +137,10 @@ if __name__ == "__main__":
 
             # print('desired')
             # print(ang_vel_desired)
-            print('actual')
-            print(enc_vel)
-            print('error')
-            print(motor_error[0,:])
+            # print('actual')
+            # print(enc_vel)
+            # print('error')
+            # print(motor_error[0,:])
             print('efforts')
             print(motor_efforts)
 
