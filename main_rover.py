@@ -147,13 +147,14 @@ if __name__ == "__main__":
 
     while True:
         try:
-            # encoder_actions()
-            # controls_actions()
-            # localization_actions()
+            encoder_actions()
+            controls_actions()
+            localization_actions()
 
             imu_read_raw()
             imu_actions()
-            print(cur_heading)
+            print(f'mag: {cur_heading}, theta: {pose[0,2]*(180/math.pi)})
+            # print(cur_heading)
 
 
             # print('error')
