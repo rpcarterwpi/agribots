@@ -140,8 +140,9 @@ if __name__ == "__main__":
             # controls_actions()
             # localization_actions()
 
-
+            imu_read_raw()
             imu_actions()
+
 
             # print('error')
             # print(motor_error[0,:])
