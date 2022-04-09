@@ -52,7 +52,7 @@ def integrate_control(error, last_error, last_sum_error, pid_dt):
     return error_int
 
 
-def motor_pid(ang_vel_cur, ang_vel_desired, motor_error, pid_t):
+def motor_pid(ang_vel_cur, ang_vel_desired, motor_error, pid_t, motor_efforts):
     motor_dir = np.ones(4)
     motor_dir[0] = 1 if ang_vel_desired[0] >= 0 else -1
     motor_dir[2] = motor_dir[0]
@@ -77,7 +77,8 @@ def motor_pid(ang_vel_cur, ang_vel_desired, motor_error, pid_t):
     error_dot = (error - last_error) / pid_dt
 
     error_full = np.array([error, error_int, error_dot])
-    efforts = np.clip((error_full.T @ pid_consts),0,100) * motor_dir
+    efforts = np.clip((error_full.T @ pid_consts),-100,100)
+    efforts = np.clip((motor_efforts + efforts),0,100) * motor_dir
     return (efforts, error_full, pid_t)
 
 def control_drive(efforts,drive_mode = DriveMode.DRIVE):
