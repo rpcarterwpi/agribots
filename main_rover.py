@@ -90,8 +90,10 @@ def encoder_actions():
 
 def imu_actions():
     # global imu_data, pose, pose_ie_t, error_axes, pose_ie
+    global cur_heading
     imu_mag_data = imu_read_raw()
-    imu.imu_mag(imu_mag_data)
+    cur_heading = imu.imu_mag(imu_mag_data)
+
     # pose_ie, error_axes, pose_ie_t = imu.imu_estimate(imu_data, pose, pose_ie_t, error_axes)
 
 def controls_actions():
@@ -125,7 +127,8 @@ if __name__ == "__main__":
 
     enc_vel, enc_pos_data, enc_history, pose_ee, turn_ee, pose_ee_t = enc.encoder_init(pose)
 
-    imu_data, pose_ie, error_axes, pose_ie_t = imu.imu_init(pose)
+    # imu_data, pose_ie, error_axes, pose_ie_t = imu.imu_init(pose)
+    cur_heading = imu.imu_mag_init()
 
     motors_active, drive_mode, ang_vel_desired, motor_error, pid_t, motor_efforts, motor_dir = mot.motor_init()
 
@@ -136,8 +139,10 @@ if __name__ == "__main__":
     # calibrate encoders first
     start_time = time.time() + 1
     print('calibrating')
+    motors_active = False
     while time.time() < start_time:
         encoder_actions()
+    motors_active = True
     print('starting')
 
     while True:
@@ -148,6 +153,7 @@ if __name__ == "__main__":
 
             imu_read_raw()
             imu_actions()
+            print(cur_heading)
 
 
             # print('error')

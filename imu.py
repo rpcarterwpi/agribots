@@ -2,6 +2,9 @@ import numpy as np
 import math
 import time
 
+# hard set from hub facing
+start_deg = 0
+
 def imu_init(pose):
     imu_data = np.zeros(9)
     pose_ie = np.zeros((3,3))
@@ -9,10 +12,14 @@ def imu_init(pose):
     pose_ie_t = time.time()
     return(imu_data, pose_ie, error_axes, pose_ie_t)
 
+def imu_mag_init():
+    cur_heading = 0
+    return cur_heading
+
 def imu_mag(mag_data):
     mx, my, mz = mag_data
     deg = math.atan2(mx,my) * (180/math.pi)
-    print(deg)
+    return deg - start_deg
 
 
 def imu_estimate(imu_data, pose, pose_ie_t, error_axes):
