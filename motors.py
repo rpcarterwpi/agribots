@@ -9,8 +9,8 @@ class DriveMode(IntEnum):
     COAST = 3
 
 # pid_consts = np.array([300,2,2])
-pid_consts = np.array([50,0.1,1])
-int_limit = 50
+pid_consts = np.array([50,0.2,1])
+int_limit = 100
 
 IN_forward = np.array([1,0])
 IN_back = np.array([0,1])
