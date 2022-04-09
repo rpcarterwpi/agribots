@@ -69,6 +69,18 @@ class MyController(Controller):
         # print(self.cur_effort_L)
         self.write_vals()
 
+    def on_L3_right(self):
+        a = 1
+
+    def on_L3_left(self):
+        a = 1
+
+    def on_R3_right(self):
+        a = 1
+
+    def on_R3_left(self):
+        a = 1
+
     def on_L3_down(self,value):
         effort = -1*MAX_SPEED*normalize_joystick(False,value)
         # print(f'L Back: {effort}')
