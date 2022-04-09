@@ -48,7 +48,7 @@ def read_raw_bits(register):
         value -= 65536
     return value
 
-def MPU6050_conv():
+def mpu6050_conv():
     # raw acceleration bits
     acc_x = read_raw_bits(ACCEL_XOUT_H)
     acc_y = read_raw_bits(ACCEL_YOUT_H)
