@@ -90,7 +90,7 @@ def controls_actions():
     global motors_active, drive_mode, enc_vel, ang_vel_desired, motor_error, pid_t, motor_efforts, motor_dir
     if motors_active:
         #! maybe change ang_vel_cur = enc_vel????
-        motor_efforts, motor_error, pid_t, motor_dir, motor_dir = mot.motor_pid(enc_vel, ang_vel_desired, motor_error, pid_t, motor_efforts)
+        motor_efforts, motor_error, pid_t, motor_dir = mot.motor_pid(enc_vel, ang_vel_desired, motor_error, pid_t, motor_efforts)
         #! omitting drive_mode for now?????
         # motor_efforts = np.array([-100,100,-100,100])
         motors_write = mot.control_drive(motor_efforts)
