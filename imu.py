@@ -3,7 +3,7 @@ import math
 import time
 
 # hard set from hub facing
-start_deg = 0
+start_deg = -65.5
 
 def imu_init(pose):
     imu_data = np.zeros(9)
