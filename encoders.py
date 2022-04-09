@@ -12,9 +12,9 @@ enc_history_size = 15
 enc_rot_per_tick =  np.array([0.025,0.025,0.025,0.025])
 
 # horizontal distance between center of wheels (m)
-wheel_track = 1
+wheel_track = 1.04 #meters
 # wheel radius (m)
-wheel_radius = 1
+wheel_radius = .275 #meters
 
 # enc_raw:
     # encoder tick binary (1x4)

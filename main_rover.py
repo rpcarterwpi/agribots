@@ -99,8 +99,10 @@ def controls_actions():
         # time.sleep(1/pwm_freq)
 
 def localization_actions():
+    global pose_ee, pose
     # fusion of pos_ee, pose_ie, pose_ge to pose
-    pass
+    pose = pose_ee
+    # pass
 
 def path_planning_actions():
 
@@ -132,6 +134,7 @@ if __name__ == "__main__":
         try:
             encoder_actions()
             controls_actions()
+            localization_actions()
             # print('error')
             # print(motor_error[0,:])
 
