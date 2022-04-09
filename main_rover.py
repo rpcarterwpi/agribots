@@ -89,7 +89,7 @@ def encoder_actions():
     pose_ee, turn_ee, pose_ee_t = enc.encoder_estimate(enc_vel, pose, pose_ee_t)
 
 def imu_actions():
-    global imu_data, pose, pose_ie_t, error_axes, pose_ie
+    # global imu_data, pose, pose_ie_t, error_axes, pose_ie
     imu_mag_data = imu_read_raw()
     imu.imu_mag(imu_mag_data)
     # pose_ie, error_axes, pose_ie_t = imu.imu_estimate(imu_data, pose, pose_ie_t, error_axes)
