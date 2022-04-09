@@ -117,7 +117,7 @@ if __name__ == "__main__":
 
     enc_vel, enc_pos_data, enc_history, pose_ee, turn_ee, pose_ee_t = enc.encoder_init(pose)
     # imu_data, pose_ie, error_axes, pose_ie_t = imu.imu_init(pose)
-    motors_active, drive_mode, ang_vel_desired, motor_error, pid_t, motor_dir motor_efforts = mot.motor_init()
+    motors_active, drive_mode, ang_vel_desired, motor_error, pid_t, motor_efforts, motor_dir = mot.motor_init()
 
     # temporary
     ang_vel_desired = np.array([1.6,-1.6,1.6,-1.6])
