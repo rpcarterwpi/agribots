@@ -10,7 +10,7 @@ class DriveMode(IntEnum):
 
 # pid_consts = np.array([300,2,2])
 pid_consts = np.array([60,0.1,0])
-int_limit = 100
+int_limit = 1000
 
 IN_forward = np.array([1,0])
 IN_back = np.array([0,1])
