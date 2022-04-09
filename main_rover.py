@@ -77,8 +77,8 @@ def motors_write_raw(motors_write):
 
 # repeated actions
 def encoder_actions():
-    global enc_vel, enc_pos_data, enc_history, motor_dir, pose, pose_ee, turn_ee, pose_ee_t
-    enc_vel, enc_pos_data, enc_history = enc.encoder_measure(encoder_read_raw(),enc_pos_data,enc_history, motor_dir)
+    global enc_vel, enc_pos_data, enc_history, pose, pose_ee, turn_ee, pose_ee_t
+    enc_vel, enc_pos_data, enc_history = enc.encoder_measure(encoder_read_raw(),enc_pos_data,enc_history)
     pose_ee, turn_ee, pose_ee_t = enc.encoder_estimate(enc_vel, pose, pose_ee_t)
 
 def imu_actions():
@@ -87,13 +87,13 @@ def imu_actions():
     pose_ie, error_axes, pose_ie_t = imu.imu_estimate(imu_data, pose, pose_ie_t, error_axes)
 
 def controls_actions():
-    global motors_active, drive_mode, enc_vel, ang_vel_desired, motor_error, pid_t, motor_efforts, motor_dir
+    global motors_active, drive_mode, enc_vel, ang_vel_desired, motor_error, pid_t, motor_efforts
     if motors_active:
         #! maybe change ang_vel_cur = enc_vel????
         motor_efforts, motor_error, pid_t = mot.motor_pid(enc_vel, ang_vel_desired, motor_error, pid_t)
         #! omitting drive_mode for now?????
         # motor_efforts = np.array([-100,100,-100,100])
-        motors_write, motor_dir = mot.control_drive(motor_efforts)
+        motors_write = mot.control_drive(motor_efforts)
         motors_write_raw(motors_write)
         #! allow one cycle of pwm??????
         # time.sleep(1/pwm_freq)
@@ -115,7 +115,7 @@ if __name__ == "__main__":
 
     enc_vel, enc_pos_data, enc_history, pose_ee, turn_ee, pose_ee_t = enc.encoder_init(pose)
     # imu_data, pose_ie, error_axes, pose_ie_t = imu.imu_init(pose)
-    motors_active, drive_mode, ang_vel_desired, motor_error, pid_t, motor_efforts, motor_dir = mot.motor_init()
+    motors_active, drive_mode, ang_vel_desired, motor_error, pid_t, motor_efforts = mot.motor_init()
 
     # temporary
     ang_vel_desired = np.array([1,1,1,1])
@@ -134,12 +134,14 @@ if __name__ == "__main__":
             controls_actions()
             # print('error')
             # print(motor_error[0,:])
-            print('desired')
-            print(ang_vel_desired)
+
+            # print('desired')
+            # print(ang_vel_desired)
             print('actual')
             print(enc_vel)
-            print('efforts')
-            print(motor_efforts)
+            # print('efforts')
+            # print(motor_efforts)
+
             # print('efforts:')
             # print(motor_efforts)
             # motors_write_raw((IN_write,PWM_write)) #force writing
