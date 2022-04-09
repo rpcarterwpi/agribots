@@ -69,16 +69,16 @@ class MyController(Controller):
         print(self.cur_effort_L)
         self.write_vals()
 
-    def on_L3_right(self):
+    def on_L3_right(self,value):
         a = 1
 
-    def on_L3_left(self):
+    def on_L3_left(self,value):
         a = 1
 
-    def on_R3_right(self):
+    def on_R3_right(self,value):
         a = 1
 
-    def on_R3_left(self):
+    def on_R3_left(self,value):
         a = 1
 
     def on_L3_down(self,value):
