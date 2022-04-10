@@ -63,9 +63,9 @@ def imu_read_raw():
     ax = 0
     ay = 0
     az = 0
-    print(wx)
-    print(wy)
-    print(wz)
+    # print(wx)
+    # print(wy)
+    # print(wz)
     imu_data = np.array([ax, ay, az, wx, wy, wz])
     # mx,my,mz = AK8963_conv() # read and convert AK8963 magnetometer data
     # data = np.array([ax, ay, az, wx, wy, wz, mx, my, mz])
