@@ -70,6 +70,10 @@ class MyController(Controller):
         self.write_vals()
 
     def on_R2_press(self,value):
+        if value < 0:
+            value = value/-31417
+        else:
+            value = value/-32767
         print(value)
         # new_val = (value * -1)/32486
         # new_value = max(0.0,min(1.0,abs((value+281)/-32486)))
