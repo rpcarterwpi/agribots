@@ -160,7 +160,7 @@ if __name__ == "__main__":
     motors_active, drive_mode, ang_vel_desired, motor_error, pid_t, motor_efforts, motor_dir = mot.motor_init()
 
     # temporary
-    # ang_vel_desired = np.array([-1.6,1.6,-1.6,1.6])
+    ang_vel_desired = np.array([2.2,2.2,2.2,2.2])
 
 
     # calibrate encoders first
@@ -180,9 +180,12 @@ if __name__ == "__main__":
             imu_read_raw()
             imu_actions()
 
-            read_vals()
+            # read_vals()
             # print(ang_vel_desired)
-            print('encoder estimate:')
+            show_vals = np.array([enc_vel[0],enc_vel[1],enc_vel[2],enc_vel[3],time.time()])
+            print(show_vals)
+            # print(enc_vel)
+
             # display_ee = np.array([pose_ee[0,0],pose_ee[0,1],pose_ee[0,2]*(180/math.pi)])
             # print(np.round(display_ee,2))
             # print('imu estimate:')
