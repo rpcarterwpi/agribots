@@ -59,7 +59,7 @@ def gps_read_raw():
 
 def imu_read_raw():
     # #! comment in with raspi
-    ax,ay,az,wx,wy,wz = MPU6050_conv() # read and convert mpu6050 data
+    ax,ay,az,wx,wy,wz = mpu6050_conv() # read and convert mpu6050 data
     imu_data = np.array([ax, ay, az, wx, wy, wz])
     # mx,my,mz = AK8963_conv() # read and convert AK8963 magnetometer data
     # data = np.array([ax, ay, az, wx, wy, wz, mx, my, mz])
