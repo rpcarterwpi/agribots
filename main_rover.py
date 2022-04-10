@@ -177,8 +177,8 @@ if __name__ == "__main__":
             encoder_actions()
             controls_actions()
             # localization_actions()
-            imu_read_raw()
-            imu_actions()
+            # imu_read_raw()
+            # imu_actions()
 
             # read_vals()
             # print(ang_vel_desired)
