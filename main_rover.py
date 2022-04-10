@@ -173,6 +173,8 @@ if __name__ == "__main__":
     motors_active = True
     print('starting')
 
+    start_time_going = time.time()
+
     while True:
         try:
             encoder_actions()
@@ -183,7 +185,7 @@ if __name__ == "__main__":
 
             # read_vals()
             # print(ang_vel_desired)
-            show_vals = np.array([enc_vel[0],enc_vel[1],enc_vel[2],enc_vel[3],time.time()])
+            show_vals = np.array([enc_vel[0],enc_vel[1],enc_vel[2],enc_vel[3],time.time() - start_time_going])
             print(show_vals)
             # print(enc_vel)
 
