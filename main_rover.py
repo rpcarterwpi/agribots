@@ -59,15 +59,17 @@ def gps_read_raw():
 
 def imu_read_raw():
     # #! comment in with raspi
-    # ax,ay,az,wx,wy,wz = MPU6050_conv() # read and convert mpu6050 data
+    ax,ay,az,wx,wy,wz = MPU6050_conv() # read and convert mpu6050 data
+    imu_data = np.array([ax, ay, az, wx, wy, wz])
     # mx,my,mz = AK8963_conv() # read and convert AK8963 magnetometer data
     # data = np.array([ax, ay, az, wx, wy, wz, mx, my, mz])
     # # return
     # print(data)
     # # return np.array([0,1,2,3,4,5,6,7,8])
     mx,my,mz = AK8963_conv() # read and convert AK8963 magnetometer data
+    mag_data = np.array([mx,my,mz])
     # data = np.array([mx,my,mz])
-    return np.array([mx,my,mz])
+    return (imu_data,mag_data)
 
 def motors_write_raw(motors_write):
     #! comment in with raspi
@@ -86,15 +88,14 @@ def motors_write_raw(motors_write):
 def encoder_actions():
     global enc_vel, enc_pos_data, enc_history, pose, pose_ee, turn_ee, pose_ee_t, motor_dir
     enc_vel, enc_pos_data, enc_history = enc.encoder_measure(encoder_read_raw(),enc_pos_data,enc_history, motor_dir)
-    pose_ee, turn_ee, pose_ee_t = enc.encoder_estimate(enc_vel, pose, pose_ee_t)
+    pose_ee, turn_ee, pose_ee_t = enc.encoder_estimate(enc_vel, pose_ee, pose_ee_t)
 
 def imu_actions():
-    # global imu_data, pose, pose_ie_t, error_axes, pose_ie
-    global cur_heading
-    imu_mag_data = imu_read_raw()
-    cur_heading = imu.imu_mag(imu_mag_data)
-
-    # pose_ie, error_axes, pose_ie_t = imu.imu_estimate(imu_data, pose, pose_ie_t, error_axes)
+    global cur_heading, imu_data, pose, pose_ie_t, error_axes, pose_ie
+    imu_data, mag_data = imu_read_raw()
+    # imu_mag_data =
+    cur_heading = imu.imu_mag(mag_data)
+    pose_ie, error_axes, pose_ie_t = imu.imu_estimate(imu_data, pose_ie, pose_ie_t, error_axes)
 
 def controls_actions():
     global motors_active, drive_mode, enc_vel, ang_vel_desired, motor_error, pid_t, motor_efforts, motor_dir
@@ -111,9 +112,9 @@ def controls_actions():
 def localization_actions():
     global pose_ee, pose, cur_heading
     # fusion of pos_ee, pose_ie, pose_ge to pose
-    pose = pose_ee
-    pose[0,2] = cur_heading
-    # pass
+    # pose = pose_ee
+    # pose[0,2] = cur_heading
+    pass
 
 def path_planning_actions():
 
@@ -145,7 +146,7 @@ if __name__ == "__main__":
 
     enc_vel, enc_pos_data, enc_history, pose_ee, turn_ee, pose_ee_t = enc.encoder_init(pose)
 
-    # imu_data, pose_ie, error_axes, pose_ie_t = imu.imu_init(pose)
+    imu_data, pose_ie, error_axes, pose_ie_t = imu.imu_init(pose)
     cur_heading = imu.imu_mag_init()
 
     motors_active, drive_mode, ang_vel_desired, motor_error, pid_t, motor_efforts, motor_dir = mot.motor_init()
@@ -167,13 +168,17 @@ if __name__ == "__main__":
         try:
             encoder_actions()
             controls_actions()
-            localization_actions()
+            # localization_actions()
             imu_read_raw()
             imu_actions()
 
             read_vals()
             # print(ang_vel_desired)
-            print(pose[0,:])
+            print('encoder estimate:')
+            display_ee = np.array(pose_ee[0,0],pose_ee[0,1],pose_ee[0,2]*(180/math.pi))
+            print(np.round(display_ee,2))
+            print('imu estimate:')
+            print(np.round(pose_ie[0,:],2))
 
 
             # print(f'mag: {cur_heading}, theta: {pose[0,2]*(180/math.pi)}')

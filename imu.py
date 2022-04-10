@@ -29,7 +29,7 @@ def imu_estimate(imu_data, pose, pose_ie_t, error_axes):
     x_acc,y_acc,z_acc = imu_data[0],imu_data[2],imu_data[1]
     pitch_acc,roll_acc,theta_acc = imu_data[3], imu_data[5], imu_data[4]
 
-    mag_x, mag_y, mag_z = imu_data[6], imu_data[7], imu_data[8]
+    # mag_x, mag_y, mag_z = imu_data[6], imu_data[7], imu_data[8]
     # so far unused
 
     pose_ie_ddot = np.array([x_acc,y_acc,pitch_acc])
