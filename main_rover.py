@@ -122,19 +122,19 @@ def read_vals():
     global ang_vel_desired
     f = open('actions.txt', 'r')
     lines = f.read().split('\n')
-    print(lines)
+    # print(lines)
     # lines = lines[0:min(2,len(lines))]
-    # try:
-    #     for i, line in enumerate(lines):
-    #         if i == 0:
-    #             ang_vel_desired[0] = float(line)
-    #             ang_vel_desired[2] = float(line)
-    #
-    #         elif i == 1:
-    #             ang_vel_desired[1] = float(line)
-    #             ang_vel_desired[3] = float(line)
-    # except:
-    #     print('cannot_read')
+    try:
+        for i, line in enumerate(lines):
+            if i == 0:
+                ang_vel_desired[0] = float(line)
+                ang_vel_desired[2] = float(line)
+
+            elif i == 1:
+                ang_vel_desired[1] = float(line)
+                ang_vel_desired[3] = float(line)
+    except:
+        print('cannot_read')
 
 
 if __name__ == "__main__":
@@ -171,7 +171,7 @@ if __name__ == "__main__":
             # imu_actions()
 
             read_vals()
-            # print(ang_vel_desired)
+            print(ang_vel_desired)
 
 
             # print(f'mag: {cur_heading}, theta: {pose[0,2]*(180/math.pi)}')
