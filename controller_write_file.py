@@ -74,7 +74,9 @@ class MyController(Controller):
             value = value/-31417
         else:
             value = value/-32767
-        print(value)
+        # print(value)
+        self.cur_effort_R = value * MAX_SPEED
+
         # new_val = (value * -1)/32486
         # new_value = max(0.0,min(1.0,abs((value+281)/-32486)))
         # print(new_val)
