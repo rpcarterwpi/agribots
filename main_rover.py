@@ -109,9 +109,10 @@ def controls_actions():
         # time.sleep(1/pwm_freq)
 
 def localization_actions():
-    global pose_ee, pose
+    global pose_ee, pose, cur_heading
     # fusion of pos_ee, pose_ie, pose_ge to pose
     pose = pose_ee
+    pose[0,2] = cur_heading
     # pass
 
 def path_planning_actions():
@@ -171,7 +172,8 @@ if __name__ == "__main__":
             imu_actions()
 
             read_vals()
-            print(ang_vel_desired)
+            # print(ang_vel_desired)
+            print(pose[0,:])
 
 
             # print(f'mag: {cur_heading}, theta: {pose[0,2]*(180/math.pi)}')
