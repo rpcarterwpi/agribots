@@ -184,7 +184,7 @@ if __name__ == "__main__":
             # print(ang_vel_desired)
             print('encoder estimate:')
             display_ee = np.array([pose_ee[0,0],pose_ee[0,1],pose_ee[0,2]*(180/math.pi)])
-            # print(np.round(display_ee,2))
+            print(np.round(display_ee,2))
             # print('imu estimate:')
             # print(np.round(pose_ie[0,:],2))
 
@@ -204,8 +204,8 @@ if __name__ == "__main__":
             # print(pose[0,:])
             # print('error')
             # print(motor_error[0,:])
-            print('efforts')
-            print(motor_efforts)
+            # print('efforts')
+            # print(motor_efforts)
 
             # print('efforts:')
             # print(motor_efforts)
