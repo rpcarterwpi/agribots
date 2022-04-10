@@ -53,14 +53,27 @@ def integrate_control(error, last_error, last_sum_error, pid_dt):
     return error_int
 
 
-def motor_pid(ang_vel_cur, ang_vel_desired, motor_error, pid_t, motor_efforts):
+def motor_pid(ang_vel_cur, ang_vel_desired, motor_error, pid_t, motor_efforts, motor_dir):
     motor_efforts = np.abs(motor_efforts)
 
-    motor_dir = np.ones(4)
-    motor_dir[0] = 1 if ang_vel_desired[0] >= 0 else -1
+    if ang_vel_desired[0] > 0:
+        motor_dir[0] = 1
+    elif ang_vel_desired[0] < 0:
+        motor_dir[0] = -1
+
+    if ang_vel_desired[1] > 0:
+        motor_dir[1] = 1
+    elif ang_vel_desired[1] < 0:
+        motor_dir[1] = -1
+
     motor_dir[2] = motor_dir[0]
-    motor_dir[1] = 1 if ang_vel_desired[1] >= 0 else -1
     motor_dir[3] = motor_dir[1]
+
+    # motor_dir[0]
+    # motor_dir[0] = 1 if ang_vel_desired[0] >= 0 else -1
+    # motor_dir[2] = motor_dir[0]
+    # motor_dir[1] = 1 if ang_vel_desired[1] >= 0 else -1
+    # motor_dir[3] = motor_dir[1]
 
     ang_vel_desired = np.abs(ang_vel_desired)
     ang_vel_cur = np.abs(ang_vel_cur)
