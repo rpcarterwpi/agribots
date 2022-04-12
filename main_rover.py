@@ -84,7 +84,7 @@ def motors_write_raw(motors_write):
     for i, in_pin in enumerate(IN_pins):
         GPIO.output(in_pin, GPIO.HIGH if IN_write[i] == 1 else GPIO.LOW)
     for i, pwm_pin in enumerate(PWM_pins):
-        if PWM_write[i] < 20
+        if PWM_write[i] < 20:
             PWM_write[i] = 0
         PWM_cur = GPIO.PWM(pwm_pin,pwm_freq)
         PWM_cur.start(PWM_write[i])
