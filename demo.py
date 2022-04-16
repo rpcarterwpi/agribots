@@ -64,7 +64,7 @@ def read_vals():
 
     for i, arg in enumerate(pass_args):
         if arg != '':
-            time.sleep(1/pwm_freq)
+            print(arg)
             try:
                 read_args[i] = float(arg)
             except:
