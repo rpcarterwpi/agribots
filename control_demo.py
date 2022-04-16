@@ -22,31 +22,37 @@ class MyController(Controller):
     def on_L3_up(self, value):
         value = value/-32767
         self.pass_args[l_index] = value
+        self.write_vals()
         print(f'left: {value}')
 
     def on_L3_down(self, value):
         value = value/-32767
         self.pass_args[l_index] = value
+        self.write_vals()
         print(f'left: {value}')
 
     def on_L3_y_at_rest(self):
         value = 0
         self.pass_args[l_index] = value
+        self.write_vals()
         print(f'left: {value}')
 
     def on_R3_up(self, value):
         value = value/-32767
         self.pass_args[r_index] = value
+        self.write_vals()
         print(f'right: {value}')
 
     def on_R3_down(self, value):
         value = value/-32767
         self.pass_args[r_index] = value
+        self.write_vals()
         print(f'right: {value}')
 
     def on_R3_y_at_rest(self):
         value = 0
         self.pass_args[r_index] = value
+        self.write_vals()
         print(f'right: {value}')
 
     def on_L3_left(self, value):
