@@ -66,6 +66,7 @@ def read_vals():
             read_args[i] = float(arg)
     except:
         print('cannot_read')
+        time.sleep(10/pwm_freq)
         read_args = [0,0]
 
 
