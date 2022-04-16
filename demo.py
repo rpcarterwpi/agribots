@@ -64,12 +64,13 @@ def read_vals():
 
     for i, arg in enumerate(pass_args):
         if arg != '':
+            print(arg)
             try:
                 read_args[i] = float(arg)
             except:
                 print('cannot read')
-                time.sleep(1/pwm_freq)
-                read_args = [0,0]
+                # time.sleep(1/pwm_freq)
+                # read_args = [0,0]
     # except:
     #     print('cannot_read')
     #     time.sleep(10/pwm_freq)
