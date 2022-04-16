@@ -7,21 +7,6 @@ import time
 import os, sys
 import RPi.GPIO as GPIO
 
-# for gps
-# import serial
-# # written agribots files
-# import encoders as enc
-# from motors import DriveMode
-# import motors as mot
-# import imu
-# import gps
-# import path_planner as path
-# from mpu9250_i2c import *
-# for raspi
-
-# uses dependencies like GPIO that cannot be tested easily
-# has the master pinout of raspi
-
 # encoder pins
 pin_enc_RL, pin_enc_FL, pin_enc_RR, pin_enc_FR = 16, 18, 11, 13
 enc_pins = [pin_enc_FL, pin_enc_FR, pin_enc_RL, pin_enc_RR]
@@ -43,25 +28,18 @@ def init_pins():
     for pin in enc_pins:
         GPIO.setup(pin, GPIO.IN)
 
+read_args = [1,1]
 
 def read_vals():
-    global ang_vel_desired
     f = open('actions.txt', 'r')
-    lines = f.read().split('\n')
-    # print(lines)
-    # lines = lines[0:min(2,len(lines))]
+    pass_args = f.read().split(',')
     try:
-        for i, line in enumerate(lines):
-            if i == 0:
-                ang_vel_desired[0] = float(line)
-                ang_vel_desired[2] = float(line)
-
-            elif i == 1:
-                ang_vel_desired[1] = float(line)
-                ang_vel_desired[3] = float(line)
+        for i, arg in enumerate(pass_args):
+            read_args[i] = arg
     except:
         print('cannot_read')
 
 
 if __name__ == "__main__":
     init_pins()
+    read_vals()
