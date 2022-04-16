@@ -76,8 +76,7 @@ if __name__ == "__main__":
             read_vals()
             efforts = 100 * np.array([read_args[0],read_args[1],read_args[0],read_args[1]])
             motors_write = control_drive(efforts)
-            print(motors_write)
-
+            motors_write_raw(motors_write)
             # print(read_args)
 
         except KeyboardInterrupt:
