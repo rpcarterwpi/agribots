@@ -18,6 +18,13 @@ pin_IN1, pin_IN2, pin_IN3, pin_IN4 = 22, 24, 26, 36
 IN_pins = [pin_IN1, pin_IN2, pin_IN3, pin_IN4]
 
 pwm_freq = 100
+read_args = [0,0]
+
+IN_forward = np.array([1,0])
+IN_back = np.array([0,1])
+
+motors_min_effort = 0
+motors_max_effort = 100
 
 def init_pins():
     GPIO.setmode(GPIO.BOARD)
@@ -28,7 +35,27 @@ def init_pins():
     for pin in enc_pins:
         GPIO.setup(pin, GPIO.IN)
 
-read_args = [1,1]
+def control_drive(efforts):
+    IN_write = np.zeros(4)
+    PWM_write = np.zeros(4)
+
+    IN_write[0:2] = IN_forward if efforts[0] >= 0 else IN_back
+    IN_write[2:4] = IN_forward if efforts[1] >= 0 else IN_back
+
+    PWM_write = np.clip(np.rint(np.abs(efforts)),motors_min_effort,motors_max_effort)
+    return ((IN_write, PWM_write))
+
+def motors_write_raw(motors_write):
+    IN_write, PWM_write = motors_write
+    for i, in_pin in enumerate(IN_pins):
+        GPIO.output(in_pin, GPIO.HIGH if IN_write[i] == 1 else GPIO.LOW)
+    for i, pwm_pin in enumerate(PWM_pins):
+        if PWM_write[i] < 20:
+            PWM_write[i] = 0
+        PWM_cur = GPIO.PWM(pwm_pin,pwm_freq)
+        PWM_cur.start(PWM_write[i])
+        time.sleep(1/pwm_freq)
+
 
 def read_vals():
     f = open('actions.txt', 'r')
@@ -44,4 +71,12 @@ def read_vals():
 
 if __name__ == "__main__":
     init_pins()
-    read_vals()
+
+    while True:
+        try:
+            read_vals()
+            print(read_args)
+
+        except KeyboardInterrupt:
+            print(': interupted, cleaning up')
+            break
