@@ -225,4 +225,5 @@ if __name__ == "__main__":
 
         except KeyboardInterrupt:
             print(': interupted, cleaning up')
+            GPIO.cleanup()
             break
