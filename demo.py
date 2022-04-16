@@ -42,4 +42,6 @@ def read_vals():
 
 if __name__ == "__main__":
     init_pins()
+    print(read_args)
     read_vals()
+    print(read_args)
