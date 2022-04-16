@@ -63,7 +63,7 @@ def read_vals():
     pass_args = str.split(',')
     try:
         for i, arg in enumerate(pass_args):
-            read_args[i] = arg
+            read_args[i] = float(arg)
     except:
         print('cannot_read')
 
@@ -74,7 +74,11 @@ if __name__ == "__main__":
     while True:
         try:
             read_vals()
-            print(read_args)
+            efforts = 100 * np.array([read_args[0],read_args[1],read_args[0],read_args[1]])
+            motors_write = control_drive(efforts)
+            print(motors_write)
+
+            # print(read_args)
 
         except KeyboardInterrupt:
             print(': interupted, cleaning up')
