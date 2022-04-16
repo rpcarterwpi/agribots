@@ -66,6 +66,7 @@ def read_vals():
             read_args[i] = float(arg)
     except:
         print('cannot_read')
+        read_args = [0,0]
 
 
 if __name__ == "__main__":
