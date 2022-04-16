@@ -61,15 +61,15 @@ def read_vals():
     f = open('actions.txt', 'r')
     str = f.read()
     pass_args = str.split(',')
-    print(pass_args)
-    # try:
-    #     for i, arg in enumerate(pass_args):
-    #         if arg != '':
-    #             read_args[i] = float(arg)
-    # except:
-    #     print('cannot_read')
-    #     time.sleep(10/pwm_freq)
-    #     read_args = [0,0]
+    # print(pass_args)
+    try:
+        for i, arg in enumerate(pass_args):
+            if arg != '':
+                read_args[i] = float(arg)
+    except:
+        print('cannot_read')
+        time.sleep(10/pwm_freq)
+        read_args = [0,0]
 
 
 if __name__ == "__main__":
