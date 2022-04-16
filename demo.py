@@ -61,7 +61,7 @@ def read_vals():
     f = open('actions.txt', 'r')
     str = f.read()
     pass_args = str.split(',')
-    # print(pass_args)
+    print(pass_args)
     try:
         for i, arg in enumerate(pass_args):
             if arg != '':
