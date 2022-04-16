@@ -65,6 +65,7 @@ def read_vals():
     for i, arg in enumerate(pass_args):
         if arg != '':
             read_args[i] = float(arg)
+    f.close()
             #
             # print(arg)
             # try:
