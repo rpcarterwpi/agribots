@@ -60,7 +60,6 @@ def motors_write_raw(motors_write):
 def read_vals():
     f = open('actions.txt', 'r')
     str = f.read()
-    print(str)
     pass_args = str.split(',')
     try:
         for i, arg in enumerate(pass_args):
