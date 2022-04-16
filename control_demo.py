@@ -16,7 +16,7 @@ class MyController(Controller):
     def write_vals(self):
         f = open('actions.txt', 'w')
         write_str = ','.join([str(arg) for arg in self.pass_args])
-        print(write_str)
+        f.write(write_str)
         f.close()
 
     def on_L3_up(self, value):
