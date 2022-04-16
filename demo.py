@@ -32,7 +32,9 @@ read_args = [1,1]
 
 def read_vals():
     f = open('actions.txt', 'r')
-    pass_args = f.read().split(',')
+    str = f.read()
+    print(str)
+    pass_args = str.split(',')
     try:
         for i, arg in enumerate(pass_args):
             read_args[i] = arg
