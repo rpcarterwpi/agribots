@@ -17,7 +17,7 @@ class MyController(Controller):
         value = value/-32767
         print(f'left: {value}')
 
-    def on_L3_x_at_rest(self):
+    def on_L3_y_at_rest(self):
         value = 0
         print(f'left: {value}')
 
@@ -29,7 +29,7 @@ class MyController(Controller):
         value = value/-32767
         print(f'right: {value}')
 
-    def on_R3_x_at_rest(self):
+    def on_R3_y_at_rest(self):
         value = 0
         print(f'right: {value}')
 
