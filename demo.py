@@ -38,6 +38,7 @@ def init_pins():
     for pin in enc_pins:
         GPIO.setup(pin, GPIO.IN)
     GPIO.setup(arduino_pin1, GPIO.OUT)
+    GPIO.setup(arduino_pin2, GPIO.OUT)
 
 def control_drive(efforts):
     IN_write = np.zeros(4)
