@@ -17,6 +17,8 @@ PWM_pins = [pin_motor_FL, pin_motor_FR, pin_motor_RL, pin_motor_RR]
 pin_IN1, pin_IN2, pin_IN3, pin_IN4 = 22, 24, 26, 36
 IN_pins = [pin_IN1, pin_IN2, pin_IN3, pin_IN4]
 
+arduino_pin1 = 33
+
 pwm_freq = 100
 read_args = [0,0]
 
@@ -34,6 +36,7 @@ def init_pins():
         GPIO.setup(pin, GPIO.OUT)
     for pin in enc_pins:
         GPIO.setup(pin, GPIO.IN)
+    GPIO.setup(arduino_pin1, GPIO.OUT)
 
 def control_drive(efforts):
     IN_write = np.zeros(4)
@@ -79,16 +82,29 @@ def read_vals():
     #     time.sleep(10/pwm_freq)
     #
 
+def write_arduino(on_val):
+    if on_val:
+        GPIO.output(arduino_pin1, GPIO.HIGH)
+    else:
+        GPIO.output(arduino_pin1, GPIO.LOW)
+
+
 
 if __name__ == "__main__":
     init_pins()
 
     while True:
         try:
-            read_vals()
-            efforts = 100 * np.array([read_args[0],read_args[1],read_args[0],read_args[1]])
-            motors_write = control_drive(efforts)
-            motors_write_raw(motors_write)
+            # read_vals()
+            # efforts = 100 * np.array([read_args[0],read_args[1],read_args[0],read_args[1]])
+            # motors_write = control_drive(efforts)
+            # motors_write_raw(motors_write)
+
+            write_arduino(True)
+            print(writing)
+            time.sleep(1)
+
+
             # print(read_args)
 
         except KeyboardInterrupt:
