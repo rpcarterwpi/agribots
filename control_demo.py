@@ -6,12 +6,13 @@ import RPi.GPIO as GPIO
 l_index = 0
 r_index = 1
 arm_index = 2
+hatch_index = 3
 
 class MyController(Controller):
 
     def __init__(self, **kwargs):
         Controller.__init__(self, **kwargs)
-        self.pass_args = [0,0,0]
+        self.pass_args = [0,0,0,0]
         self.write_vals()
 
     def write_vals(self):
@@ -82,6 +83,16 @@ class MyController(Controller):
     def on_x_release(self):
         self.pass_args[arm_index] = 0
         print('arm 0')
+        self.write_vals()
+
+    def on_square_press(self):
+        self.pass_args[hatch_index] = 1
+        print('hatch 1')
+        self.write_vals()
+
+    def on_square_release(self):
+        self.pass_args[hatch_index] = 0
+        print('hatch 0')
         self.write_vals()
 
 

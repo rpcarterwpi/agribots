@@ -18,6 +18,7 @@ pin_IN1, pin_IN2, pin_IN3, pin_IN4 = 22, 24, 26, 36
 IN_pins = [pin_IN1, pin_IN2, pin_IN3, pin_IN4]
 
 arduino_pin1 = 33
+arduino_pin2 = 32
 
 pwm_freq = 100
 read_args = [0,0,0,0]
@@ -82,11 +83,17 @@ def read_vals():
     #     time.sleep(10/pwm_freq)
     #
 
-def write_arduino(on_val):
+def write_arduino_arm(on_val):
     if on_val:
         GPIO.output(arduino_pin1, GPIO.HIGH)
     else:
         GPIO.output(arduino_pin1, GPIO.LOW)
+
+def write_arduino_hatch(on_val):
+    if on_val:
+        GPIO.output(arduino_pin2, GPIO.HIGH)
+    else:
+        GPIO.output(arduino_pin2, GPIO.LOW)
 
 
 
@@ -100,8 +107,11 @@ if __name__ == "__main__":
             # motors_write = control_drive(efforts)
             # motors_write_raw(motors_write)
 
-            print(f'send to arduino:{read_args[2]}')
-            write_arduino(read_args[2])
+            print(f'send to arm:{read_args[2]}')
+            write_arduino_arm(read_args[2])
+
+            print(f'send to hatch:{read_args[3]}')
+            write_arduino_hatch(read_args[3])
 
             # print('on')
             # time.sleep(1)
