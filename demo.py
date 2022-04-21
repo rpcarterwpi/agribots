@@ -101,7 +101,7 @@ if __name__ == "__main__":
             # motors_write_raw(motors_write)
 
             write_arduino(True)
-            print(writing)
+            print('writing')
             time.sleep(1)
 
 
