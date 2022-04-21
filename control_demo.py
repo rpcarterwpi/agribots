@@ -5,12 +5,13 @@ import RPi.GPIO as GPIO
 
 l_index = 0
 r_index = 1
+arm_index = 2
 
 class MyController(Controller):
 
     def __init__(self, **kwargs):
         Controller.__init__(self, **kwargs)
-        self.pass_args = [0,0]
+        self.pass_args = [0,0,0]
         self.write_vals()
 
     def write_vals(self):
@@ -72,6 +73,18 @@ class MyController(Controller):
 
     def on_R3_x_at_rest(self):
         a = 0
+
+    def on_x_press(self):
+        self.pass_args[arm_index] = 1
+        print('arm 1')
+        self.write_vals()
+
+    def on_x_release(self):
+        self.pass_args[arm_index] = 0
+        print('arm 0')
+        self.write_vals()
+
+
 
 
 controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=False)

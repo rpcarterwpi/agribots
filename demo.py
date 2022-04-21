@@ -20,7 +20,7 @@ IN_pins = [pin_IN1, pin_IN2, pin_IN3, pin_IN4]
 arduino_pin1 = 33
 
 pwm_freq = 100
-read_args = [0,0]
+read_args = [0,0,0,0]
 
 IN_forward = np.array([1,0])
 IN_back = np.array([0,1])
@@ -95,17 +95,19 @@ if __name__ == "__main__":
 
     while True:
         try:
-            # read_vals()
+            read_vals()
             # efforts = 100 * np.array([read_args[0],read_args[1],read_args[0],read_args[1]])
             # motors_write = control_drive(efforts)
             # motors_write_raw(motors_write)
 
-            write_arduino(True)
-            print('on')
-            time.sleep(1)
-            write_arduino(False)
-            print('off')
-            time.sleep(1)
+            print(f'send to arduino:{read_args[2]}')
+            write_arduino(read_args[2])
+
+            # print('on')
+            # time.sleep(1)
+            # write_arduino(False)
+            # print('off')
+            # time.sleep(1)
 
 
             # print(read_args)
