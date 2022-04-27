@@ -95,8 +95,5 @@ class MyController(Controller):
         print('hatch 0')
         self.write_vals()
 
-
-
-
 controller = MyController(interface="/dev/input/js0", connecting_using_ds4drv=False)
 controller.listen()

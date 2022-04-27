@@ -23,17 +23,9 @@ enc_vel_cur = np.array([1,2,3,4])
 enc_vel_desired = np.array([2,2,2,2])
 pid_e_t = time.time()
 
-
-
 def encoder_measure(enc_pos,enc_delta_history,iter):
     enc_pos_cur = [GPIO.input(enc_FL),GPIO.input(enc_FR),GPIO.input(enc_RL),GPIO.input(enc_RR)]
     enc_delta_cur = np.abs(enc_pos_cur - enc_pos)
-    # if not np.array_equal(enc_delta_cur,np.zeros(4))
-    # enc_pos_cur = np.array()
-
-    # left side and right side must have corresponding directions
-    # fl fr rl rr
-
 
 def encoder_pid(enc_vel_cur,enc_vel_desired,enc_vel_error,pid_e_t,pid_e_consts,int_overflow_lim):
     pid_e_t_cur = time.time()
@@ -55,7 +47,7 @@ def sensor_actuator_init():
     GPIO.setup(ENA1, GPIO.OUT)
     GPIO.setup(IN1, GPIO.OUT)
     GPIO.setup(IN2, GPIO.OUT)
-    # GPIO.setup(ENC1, GPIO.IN)
+
 
 def control_drive(efforts,drive_mode = DriveMode.DRIVE):
     if drive_mode == DriveMode.DRIVE:
@@ -87,16 +79,6 @@ def control_drive(efforts,drive_mode = DriveMode.DRIVE):
             PWM_FL = GPIO.PWM(motor_pwm_pins[i],PWM_FREQ)
             PWM_FL.start(0)
 
-
-
-
-    # directions = np.array([])
-
-
 together = encoder_pid(enc_vel_cur,enc_vel_desired,enc_vel_error,pid_e_t,pid_e_consts,int_overflow_lim)
 
 control_drive(efforts)
-
-# print(together[0])
-# print(together[1])
-# enc_vel_cur, enc_vel_des,

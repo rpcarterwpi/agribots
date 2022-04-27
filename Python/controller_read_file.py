@@ -23,7 +23,6 @@ ENA2, IN3, IN4 = 32, 16, 18
 PWM_FREQ = 100
 MAX_SPEED = 100
 
-
 def tank_drive(mode,effort,motor):
     if motor == Motors.RIGHT:
         # print('left')
@@ -89,17 +88,8 @@ GPIO.setup(IN4, GPIO.OUT)
 
 while True:
     try:
-        # time.sleep(0.1)
         read_vals()
         print(drive_vals)
-        # print(drive_vals[2])
-        # print(drive_vals[0])
-        # print(Motors.LEFT)
-        #
-        # print(drive_vals[3])
-        # print(drive_vals[1])
-        # print(Motors.RIGHT)
-
         tank_drive(drive_vals[2],drive_vals[0],Motors.LEFT)
         tank_drive(drive_vals[3],drive_vals[1],Motors.RIGHT)
 

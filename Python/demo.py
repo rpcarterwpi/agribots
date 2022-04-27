@@ -71,18 +71,6 @@ def read_vals():
         if arg != '':
             read_args[i] = float(arg)
     f.close()
-            #
-            # print(arg)
-            # try:
-            #
-            # except:
-            #     print('cannot read')
-            #     # time.sleep(1/pwm_freq)
-            #     read_args = [0,0]
-    # except:
-    #     print('cannot_read')
-    #     time.sleep(10/pwm_freq)
-    #
 
 def write_arduino_arm(on_val):
     if on_val:
@@ -104,24 +92,15 @@ if __name__ == "__main__":
     while True:
         try:
             read_vals()
-            # efforts = 100 * np.array([read_args[0],read_args[1],read_args[0],read_args[1]])
-            # motors_write = control_drive(efforts)
-            # motors_write_raw(motors_write)
+            efforts = 100 * np.array([read_args[0],read_args[1],read_args[0],read_args[1]])
+            motors_write = control_drive(efforts)
+            motors_write_raw(motors_write)
 
             print(f'send to arm:{read_args[2]}')
             write_arduino_arm(read_args[2])
 
             print(f'send to hatch:{read_args[3]}')
             write_arduino_hatch(read_args[3])
-
-            # print('on')
-            # time.sleep(1)
-            # write_arduino(False)
-            # print('off')
-            # time.sleep(1)
-
-
-            # print(read_args)
 
         except KeyboardInterrupt:
             print(': interupted, cleaning up')

@@ -121,8 +121,8 @@ def controls_actions():
 def localization_actions():
     global pose_ee, pose, cur_heading
     # fusion of pos_ee, pose_ie, pose_ge to pose
-    # pose = pose_ee
-    # pose[0,2] = cur_heading
+    pose = pose_ee
+    pose[0,2] = cur_heading
     pass
 
 def path_planning_actions():
@@ -179,8 +179,8 @@ if __name__ == "__main__":
         try:
             encoder_actions()
             controls_actions()
-            # localization_actions()
-            # imu_read_raw()
+            localization_actions()
+            imu_read_raw()
             # imu_actions()
 
             read_vals()
@@ -191,36 +191,9 @@ if __name__ == "__main__":
 
             display_ee = np.array([pose_ee[0,0],pose_ee[0,1],pose_ee[0,2]*(180/math.pi)])
             print(np.round(display_ee,2))
-            # print('imu estimate:')
-            # print(np.round(pose_ie[0,:],2))
 
-
-            # print(f'mag: {cur_heading}, theta: {pose[0,2]*(180/math.pi)}')
-            # print(cur_heading)
-
-
-            # print('error')
-            # print(motor_error[0,:])
-
-            # print('desired')
-            # print(ang_vel_desired)
-            # print(f'actual: {round(enc_vel[1],2)}, error: {round(motor_error[0,1],2)}, effort: {round(motor_efforts[1],2)}')
-            # print(enc_vel)
-
-            # print(pose[0,:])
-            # print('error')
-            # print(motor_error[0,:])
-            # print('efforts')
-            # print(motor_efforts)
-
-            # print('efforts:')
-            # print(motor_efforts)
-            # motors_write_raw((IN_write,PWM_write)) #force writing
-            # print(enc_vel/(2*math.pi)) # rpm
-            # print(motor_error[0,:])
-            # print(ang_vel_desire)
-            # imu_actions()
-            # controls_actions()
+            imu_actions()
+            controls_actions()
 
 
         except KeyboardInterrupt:
